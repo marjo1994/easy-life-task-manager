@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neutral-50: #ffffff;
+  --color-neutral-100: #94979a;
+  --color-neutral-200: #393d41;
+  --color-neutral-300: #2c2f33;
+  --color-neutral-400: #222528;
+
+  --color-primary-50: #f4ccc8;
+  --color-primary-100: #eba59e;
+  --color-primary-200: #e27d73;
+  --color-primary-300: #da584b;
+
+  --color-secondary-50: #c8e1bc;
+  --color-secondary-100: #aad199;
+  --color-secondary-200: #8dc275;
+  --color-secondary-300: #70b252;
+
+  --color-tertiary-50: #f9eed7;
+  --color-tertiary-100: #f2daab;
+  --color-tertiary-200: #ebc77f;
+  --color-tertiary-300: #e5b454;
+}
+
+@layer base {
+  /* Headings - Desktop */
+  .text-heading-xl {
+    font-size: 4rem;
+    line-height: 5.5rem;
+    letter-spacing: 0.0625rem;
+  }
+
+  .text-heading-l {
+    font-size: 3.5rem;
+    line-height: 4.5rem;
+    letter-spacing: 0.0625rem;
+  }
+
+  .text-heading-m {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    letter-spacing: 0.0625rem;
+  }
+
+  .text-heading-s {
+    font-size: 2rem;
+    line-height: 3rem;
+    letter-spacing: 0.0625rem;
+  }
+
+  .text-heading-xs {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    letter-spacing: 0.0625rem;
+  }
+
+  /* Headings - Mobile */
+  @media (max-width: 768px) {
+    .text-heading-l {
+      font-size: 2.125rem;
+      line-height: 3rem;
+    }
+
+    .text-heading-m {
+      font-size: 2.063rem;
+      line-height: 2.5rem;
+    }
+
+    .text-heading-s {
+      font-size: 2rem;
+      line-height: 2.125rem;
+    }
+
+    .text-heading-xs {
+      font-size: 1.938rem;
+      line-height: 2rem;
+    }
+  }
+
+  /* Body - Desktop */
+  .text-body-xl {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    letter-spacing: 0.047rem;
+  }
+
+  .text-body-l {
+    font-size: 1.125rem;
+    line-height: 2rem;
+    letter-spacing: 0.047rem;
+  }
+
+  .text-body-m {
+    font-size: 0.938rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.047rem;
+  }
+
+  .text-body-s {
+    font-size: 0.813rem;
+    line-height: 1.375rem;
+    letter-spacing: 0.016rem;
+  }
+}
