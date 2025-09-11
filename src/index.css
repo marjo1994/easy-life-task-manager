@@ -21,10 +21,10 @@
   --color-tertiary-100: #f2daab;
   --color-tertiary-200: #ebc77f;
   --color-tertiary-300: #e5b454;
+  --breakpoint-xl: 90rem;
 }
 
 @layer base {
-  /* Headings - Desktop */
   .text-heading-xl {
     font-size: 4rem;
     line-height: 5.5rem;
@@ -78,7 +78,6 @@
     }
   }
 
-  /* Body - Desktop */
   .text-body-xl {
     font-size: 1.25rem;
     line-height: 2rem;
