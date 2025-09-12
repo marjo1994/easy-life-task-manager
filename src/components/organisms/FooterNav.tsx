@@ -5,7 +5,7 @@ import AddTaskIcon from "../../assets/add-task-icon.svg";
 
 export const FooterNav = () => {
   return (
-    <nav className="fixed bottom-0 left-0 flex w-full justify-around bg-neutral-300 px-8 pt-4 pb-6 text-neutral-100 lg:hidden">
+    <nav className="fixed bottom-0 left-0 flex w-full justify-between bg-neutral-300 px-8 pt-4 pb-6 text-neutral-100 lg:hidden">
       <NavLink to="/" className="flex flex-col items-center">
         <img src={DashboardIcon} alt="dashboard icon" className="mb-1" />
         Dashboard

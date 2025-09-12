@@ -24,6 +24,13 @@
   --breakpoint-xl: 90rem;
 }
 
+@layer utilities {
+  .filter-custom-red {
+    filter: brightness(0) saturate(100%) invert(40%) sepia(79%) saturate(807%)
+      hue-rotate(325deg) brightness(92%) contrast(84%);
+  }
+}
+
 @layer base {
   .text-heading-xl {
     font-size: 4rem;
@@ -99,6 +106,12 @@
   .text-body-s {
     font-size: 0.813rem;
     line-height: 1.375rem;
+    letter-spacing: 0.016rem;
+  }
+
+  .text-subheadline-s {
+    font-size: 0.813rem;
+    line-height: 0.813rem;
     letter-spacing: 0.016rem;
   }
 }

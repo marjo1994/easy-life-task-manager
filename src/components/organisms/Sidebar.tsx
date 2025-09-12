@@ -3,11 +3,12 @@ import ListIcon from "../../assets/list-icon.svg";
 import RavnLogo from "../../assets/ravn-logo.svg";
 import DashboardIcon from "../../assets/dashboard-icon.svg";
 import DashboardIconActive from "../../assets/dashboard-icon-active.svg";
+import ListIconActive from "../../assets/list-icon-active-2.svg";
 import ActiveIndicator from "../../assets/active-indicator.svg";
 
 export const Sidebar = () => {
   return (
-    <aside className="m-6 hidden w-full rounded-3xl bg-neutral-200 lg:flex lg:w-56 lg:flex-col xl:w-[232px]">
+    <aside className="hidden w-full rounded-3xl bg-neutral-200 lg:mr-6 lg:flex lg:h-full lg:w-56 lg:flex-col xl:w-[232px]">
       <div className="mt-3.5 mb-11 flex items-center justify-center">
         <img src={RavnLogo} alt="Ravn Logo" />
       </div>
@@ -62,8 +63,8 @@ export const Sidebar = () => {
         {({ isActive }) => (
           <>
             <img
-              src={isActive ? DashboardIconActive : DashboardIcon}
-              alt="Dashboard Icon"
+              src={isActive ? ListIconActive : ListIcon}
+              alt="List Icon"
               className="mr-4"
             />
             <span
@@ -82,12 +83,6 @@ export const Sidebar = () => {
             )}
           </>
         )}
-      </NavLink>
-      <NavLink to="/my-tasks" className="flex items-center px-5 py-4">
-        <img src={ListIcon} alt="List Icon" className="mr-4" />
-        <span className="text-body-m font-semibold text-neutral-100">
-          MY TASK
-        </span>
       </NavLink>
     </aside>
   );

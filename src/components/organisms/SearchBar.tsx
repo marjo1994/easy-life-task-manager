@@ -10,7 +10,7 @@ export const SearchBar = () => {
         <input
           type="search"
           placeholder="Search"
-          className="text-body-m placeholder-neutral-100"
+          className="text-body-m text-neutral-100 placeholder-neutral-100 focus:outline-none lg:w-full"
         />
       </div>
 

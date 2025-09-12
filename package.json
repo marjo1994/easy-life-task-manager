@@ -13,6 +13,7 @@
   "dependencies": {
     "@apollo/client": "^4.0.4",
     "@fontsource/inter": "^5.2.6",
+    "@headlessui/react": "^2.2.7",
     "graphql": "^16.11.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
