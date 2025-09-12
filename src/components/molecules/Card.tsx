@@ -18,7 +18,7 @@ export const Card = ({ task }: CardProps) => {
         <img src={threeDots} alt="three dots" />
       </div>
       <div className="mb-4 flex justify-between">
-        <span>{Number(task.pointEstimate)}</span>
+        <span>{task.pointEstimate}</span>
         <div>{formatDate(task.dueDate)}</div>
       </div>
       <div className="mb-4 flex gap-2">
