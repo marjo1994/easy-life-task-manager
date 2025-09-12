@@ -1,10 +1,39 @@
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
-import { Card } from "../molecules/Card";
 import DashboardTab from "../../assets/dashboard-tab.svg";
 import ListTab from "../../assets/list-tab.svg";
 import { classNames } from "../../utils/utils";
+import { TaskListView } from "../organisms/ListView";
+import { gql } from "../../__generated__";
+import { useQuery } from "@apollo/client/react";
+import { KanbanView } from "../organisms/KanbanView";
+
+const GET_TASKS = gql(`
+  query GetTasks($input: FilterTaskInput!) {
+    tasks(input: $input) {
+      id
+      name
+      pointEstimate
+      dueDate
+      status
+      tags
+      assignee {
+        fullName
+      }
+    }
+  }
+`);
 
 export const Dashboard: React.FC = () => {
+  const { data, loading, error } = useQuery(GET_TASKS, {
+    variables: {
+      input: {},
+    },
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  console.log("data", data);
+
   const tabs = [
     { id: 0, label: "Dashboard", icon: DashboardTab },
     { id: 1, label: "Task", icon: ListTab },
@@ -52,35 +81,11 @@ export const Dashboard: React.FC = () => {
 
         <TabPanels className="mt-4 ml-4 lg:ml-0">
           <TabPanel className="h-[calc(100vh-160px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
-            <div className="flex h-full min-w-max gap-8">
-              {[
-                { title: "Working", count: 3 },
-                { title: "In progress", count: 3 },
-                { title: "Completed", count: 3 },
-              ].map((column) => (
-                <div
-                  key={column.title}
-                  className="flex w-70 flex-shrink-0 flex-col rounded-lg xl:w-87"
-                >
-                  <h2 className="sticky top-0 z-10 mb-4 text-neutral-50">
-                    {column.title} ({column.count})
-                  </h2>
-                  <div className="flex-1 overflow-y-auto">
-                    <div className="flex flex-col gap-4">
-                      {Array.from({ length: 8 }).map((_, i) => (
-                        <Card key={i} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <KanbanView tasks={data?.tasks ?? []} />
           </TabPanel>
 
-          <TabPanel>
-            <div>
-              <h2>List View</h2>
-            </div>
+          <TabPanel className="h-[calc(100vh-160px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
+            <TaskListView />
           </TabPanel>
         </TabPanels>
       </TabGroup>

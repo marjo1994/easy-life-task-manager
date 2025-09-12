@@ -1,12 +1,33 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+import { SetContextLink } from "@apollo/client/link/context";
+import { ApolloProvider } from "@apollo/client/react";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/700.css";
 import "./index.css";
-import App from "./App.tsx";
+
+const httpLink = new HttpLink({
+  uri: "https://syn-api-prod.herokuapp.com/graphql",
+});
+
+const authLink = new SetContextLink(({ headers }) => {
+  const token = import.meta.env.VITE_API_TOKEN;
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  <ApolloProvider client={client}>
     <App />
-  </StrictMode>
+  </ApolloProvider>
 );

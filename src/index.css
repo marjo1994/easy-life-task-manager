@@ -92,13 +92,13 @@
   }
 
   .text-body-l {
-    font-size: 1.125rem;
+    font-size: 1.125rem; /*18px*/
     line-height: 2rem;
     letter-spacing: 0.047rem;
   }
 
   .text-body-m {
-    font-size: 0.938rem;
+    font-size: 0.938rem; /*15px*/
     line-height: 1.5rem;
     letter-spacing: 0.047rem;
   }
@@ -112,6 +112,12 @@
   .text-subheadline-s {
     font-size: 0.813rem;
     line-height: 0.813rem;
+    letter-spacing: 0.016rem;
+  }
+
+  .text-title-s-mobile {
+    font-size: 1.125rem; /*18px*/
+    line-height: 1.125rem; /*18px*/
     letter-spacing: 0.016rem;
   }
 }
