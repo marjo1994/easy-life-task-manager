@@ -1,12 +1,6 @@
 import { Card } from "../molecules/Card";
 import type { GetTasksQuery } from "../../__generated__/graphql";
-const STATUS_LABELS: Record<string, string> = {
-  BACKLOG: "Backlog",
-  TODO: "To Do",
-  IN_PROGRESS: "In progress",
-  CANCELLED: "Cancelled",
-  DONE: "Completed",
-};
+import { STATUS_LABELS } from "../../utils/statusLabels";
 
 export const KanbanView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
   const groupedTasks = tasks.reduce<Record<string, any[]>>((acc, task) => {
@@ -23,8 +17,8 @@ export const KanbanView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
           key={status}
           className="flex w-80 flex-shrink-0 flex-col rounded-lg xl:w-87"
         >
-          <h2 className="sticky top-0 z-10 mb-4 text-neutral-50">
-            {STATUS_LABELS[status] ?? status} ({tasks.length})
+          <h2 className="text-headline-s-mobile xl:text-body-l sticky top-0 z-10 mb-6 font-semibold text-neutral-50">
+            {`${STATUS_LABELS[status] ?? status} (${String(tasks.length).padStart(2, "0")})`}
           </h2>
           <div className="flex-1 overflow-y-auto">
             <div className="flex flex-col gap-4">

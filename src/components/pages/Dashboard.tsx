@@ -1,38 +1,22 @@
+import { TaskListView } from "../organisms/ListView";
+import { KanbanView } from "../organisms/KanbanView";
+import { useTasks } from "../../hooks/useTasks";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import DashboardTab from "../../assets/dashboard-tab.svg";
 import ListTab from "../../assets/list-tab.svg";
 import { classNames } from "../../utils/utils";
-import { TaskListView } from "../organisms/ListView";
-import { gql } from "../../__generated__";
-import { useQuery } from "@apollo/client/react";
-import { KanbanView } from "../organisms/KanbanView";
-
-const GET_TASKS = gql(`
-  query GetTasks($input: FilterTaskInput!) {
-    tasks(input: $input) {
-      id
-      name
-      pointEstimate
-      dueDate
-      status
-      tags
-      assignee {
-        fullName
-      }
-    }
-  }
-`);
+import plusBtn from "../../assets/plus-btn.svg";
+import { Modal } from "../organisms/Modal";
+import { useState } from "react";
+import { AddTaskForm } from "../organisms/AddTaskForm";
 
 export const Dashboard: React.FC = () => {
-  const { data, loading, error } = useQuery(GET_TASKS, {
-    variables: {
-      input: {},
-    },
-  });
+  const [isOpen, setIsOpen] = useState(false);
+  const { tasks, loading, error } = useTasks();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log("data", data);
+  //console.log("data", tasks);
 
   const tabs = [
     { id: 0, label: "Dashboard", icon: DashboardTab },
@@ -52,7 +36,7 @@ export const Dashboard: React.FC = () => {
               key={tab.id}
               className={({ selected }) =>
                 classNames(
-                  "px-7 py-1 text-center lg:px-2 lg:py-2",
+                  "px-7 py-2 text-center lg:px-2 lg:py-2",
                   "flex-1 lg:flex-none",
                   selected
                     ? "lg:border-primary-300 rounded-lg bg-neutral-100 lg:rounded-md lg:border lg:bg-transparent"
@@ -72,23 +56,39 @@ export const Dashboard: React.FC = () => {
                     />
                   </div>
 
-                  <div className="lg:hidden">{tab.label}</div>
+                  <div className="text-subheadline-s-mobile lg:hidden">
+                    {tab.label}
+                  </div>
                 </>
               )}
             </Tab>
           ))}
+          <button
+            type="button"
+            className="ml-auto hidden lg:block"
+            onClick={() => setIsOpen(true)}
+          >
+            <img src={plusBtn} alt="plus-icon" />
+          </button>
         </TabList>
 
         <TabPanels className="mt-4 ml-4 lg:ml-0">
           <TabPanel className="h-[calc(100vh-160px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
-            <KanbanView tasks={data?.tasks ?? []} />
+            <KanbanView tasks={tasks} />
           </TabPanel>
 
           <TabPanel className="h-[calc(100vh-160px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
-            <TaskListView />
+            <TaskListView tasks={tasks} />
           </TabPanel>
         </TabPanels>
       </TabGroup>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <AddTaskForm
+          onSubmit={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
+      </Modal>
     </div>
   );
 };

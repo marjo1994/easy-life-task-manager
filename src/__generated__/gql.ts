@@ -15,9 +15,11 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 type Documents = {
     "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        fullName\n      }\n    }\n  }\n": typeof types.GetTasksDocument,
+    "\n  query GetUsers {\n    users {\n      id\n      fullName\n      avatar\n    }\n  }\n": typeof types.GetUsersDocument,
 };
 const documents: Documents = {
     "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        fullName\n      }\n    }\n  }\n": types.GetTasksDocument,
+    "\n  query GetUsers {\n    users {\n      id\n      fullName\n      avatar\n    }\n  }\n": types.GetUsersDocument,
 };
 
 /**
@@ -38,6 +40,10 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        fullName\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        fullName\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetUsers {\n    users {\n      id\n      fullName\n      avatar\n    }\n  }\n"): (typeof documents)["\n  query GetUsers {\n    users {\n      id\n      fullName\n      avatar\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -2,7 +2,7 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: "https://syn-api-prod.herokuapp.com/graphql",
-  documents: ["src/**/*.tsx"],
+  documents: ["src/**/*.tsx", "src/graphql/queries/**/*.ts"],
   generates: {
     "./src/__generated__/": {
       preset: "client",
