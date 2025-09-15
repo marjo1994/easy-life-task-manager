@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Sidebar } from "./components/organisms/Sidebar";
 import { SearchBar } from "./components/organisms/SearchBar";
 import { FooterNav } from "./components/organisms/FooterNav";
