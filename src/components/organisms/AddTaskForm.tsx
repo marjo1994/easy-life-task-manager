@@ -1,5 +1,5 @@
-import { FormProvider, useForm } from "react-hook-form";
-//import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import estimateicon from "../../assets/control-estimate-icon.svg";
 import labelicon from "../../assets/label-icon.svg";
 import duedateIcon from "../../assets/due-date-icon.svg";
@@ -9,31 +9,56 @@ import { MultiListBoxField } from "../molecules/MultiListBoxField";
 import { TaskTagOptions } from "../../utils/taskTagOptions";
 import { PointEstimateOptions } from "../../utils/pointEstimateOptions";
 import { DatePickerField } from "../molecules/DatePickerField";
+import { useCreateTask } from "../../hooks/useCreateTask";
+import {
+  Status,
+  TaskTag,
+  type CreateTaskInput,
+  type PointEstimate,
+} from "../../__generated__/graphql";
+import { taskSchema } from "../../schemas/taskSchema";
 
-type AddTaskFormProps = {
-  onSubmit: () => void;
+const ErrorMessage = ({ name }: { name: string }) => {
+  const {
+    formState: { errors },
+  } = useFormContext();
+  return errors[name] ? (
+    <p className="text-body-s text-primary-300 font-normal">
+      {errors[name]?.message as string}
+    </p>
+  ) : null;
 };
 
-export const AddTaskForm = ({ onSubmit }: AddTaskFormProps) => {
+export const AddTaskForm = () => {
   const methods = useForm({
     mode: "onChange",
+    resolver: zodResolver(taskSchema),
     defaultValues: {
-      estimate: "",
-      assignee: "",
+      pointEstimate: "" as PointEstimate,
+      assigneeId: "",
       name: "",
       dueDate: "",
-      label: "",
+      tags: [] as TaskTag[],
+      status: Status.Backlog,
     },
   });
+
+  const { createTask, loading, error } = useCreateTask();
+
+  const handleSubmit = async (values: CreateTaskInput) => {
+    try {
+      console.log("Form submitted:", values);
+      await createTask(values);
+      methods.reset();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit((data) => {
-          console.log("Form submitted:", data);
-          onSubmit();
-          methods.reset();
-        })}
-      >
+      <form onSubmit={methods.handleSubmit(handleSubmit)}>
+        {error && <p className="text-primary-200 mt-2">{error.message}</p>}
         <div className="mb-6">
           <label className="hidden">Task Name</label>
           <input
@@ -41,31 +66,42 @@ export const AddTaskForm = ({ onSubmit }: AddTaskFormProps) => {
             {...methods.register("name")}
             placeholder="Task Title"
           ></input>
+          <ErrorMessage name="name" />
         </div>
 
-        <div className="mb-6 flex flex-row items-center gap-4 text-neutral-50">
-          <ListBoxField
-            name="estimate"
-            options={[
-              { value: "", label: "Estimate" },
-              ...PointEstimateOptions,
-            ]}
-            icon={estimateicon}
-          />
+        <div className="mb-6 flex flex-row items-start gap-4 text-neutral-50">
+          <div className="flex flex-1 flex-col">
+            <ListBoxField
+              name="pointEstimate"
+              options={[
+                { value: "", label: "Estimate" },
+                ...PointEstimateOptions,
+              ]}
+              icon={estimateicon}
+            />
+            <ErrorMessage name="pointEstimate" />
+          </div>
 
-          <UserSelector />
-
-          <MultiListBoxField
-            name="label"
-            options={TaskTagOptions}
-            icon={labelicon}
-          />
-
-          <DatePickerField
-            name="dueDate"
-            icon={duedateIcon}
-            placeholder="Due Date"
-          />
+          <div className="flex flex-1 flex-col">
+            <UserSelector />
+            <ErrorMessage name="assigneeId" />
+          </div>
+          <div className="flex flex-1 flex-col">
+            <MultiListBoxField
+              name="tags"
+              options={TaskTagOptions}
+              icon={labelicon}
+            />
+            <ErrorMessage name="tags" />
+          </div>
+          <div className="flex flex-1 flex-col">
+            <DatePickerField
+              name="dueDate"
+              icon={duedateIcon}
+              placeholder="Due Date"
+            />
+            <ErrorMessage name="dueDate" />
+          </div>
         </div>
         <div className="flex justify-end">
           <button
@@ -78,8 +114,9 @@ export const AddTaskForm = ({ onSubmit }: AddTaskFormProps) => {
           <button
             type="submit"
             className="bg-primary-300 rounded-lg p-2 font-normal text-neutral-50"
+            disabled={loading}
           >
-            Create
+            {loading ? "Creating" : "Create"}
           </button>
         </div>
       </form>

@@ -6,7 +6,7 @@ export function useUsers() {
 
   const usersWithValueLabel =
     data?.users?.map((user) => ({
-      value: user.fullName,
+      value: user.id,
       label: user.fullName,
     })) || [];
 

@@ -11,7 +11,7 @@ export const UserSelector = () => {
   if (loading) {
     return (
       <ListBoxField
-        name="assignee"
+        name="assigneeId"
         options={[{ value: "", label: "Assignee..." }]}
         icon={assigneeicon}
         disabled={true}
@@ -22,7 +22,7 @@ export const UserSelector = () => {
 
   return (
     <ListBoxField
-      name="assignee"
+      name="assigneeId"
       options={[{ value: "", label: "Assignee" }, ...usersOptions]}
       icon={assigneeicon}
       avatar={true}

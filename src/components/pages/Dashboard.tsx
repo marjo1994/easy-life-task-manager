@@ -22,6 +22,7 @@ export const Dashboard: React.FC = () => {
     { id: 0, label: "Dashboard", icon: DashboardTab },
     { id: 1, label: "Task", icon: ListTab },
   ];
+
   return (
     <div className="mt-4 h-full">
       <TabGroup>
@@ -83,11 +84,7 @@ export const Dashboard: React.FC = () => {
         </TabPanels>
       </TabGroup>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <AddTaskForm
-          onSubmit={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
+        <AddTaskForm />
       </Modal>
     </div>
   );
