@@ -15,8 +15,19 @@ type Task = GetTasksQuery["tasks"][number];
 
 type CardProps = {
   task: Task;
+  onEditClick: () => void;
+  onDeleteClick: () => void;
 };
-export const Card = ({ task }: CardProps) => {
+export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
+  const handleEdit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onEditClick();
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onDeleteClick();
+  };
   return (
     <div className="rounded-xl bg-neutral-300 p-3 text-neutral-50">
       <div className="mb-3 flex justify-between">
@@ -32,18 +43,18 @@ export const Card = ({ task }: CardProps) => {
             className="rounded-lg border border-neutral-100 bg-neutral-200 p-2"
           >
             <MenuItem>
-              <a
-                className="flex flex-row items-center px-4 py-1.5 text-neutral-50 data-focus:bg-blue-100"
-                href="#"
+              <button
+                className="flex flex-row items-center px-4 py-1.5 text-neutral-50"
+                onClick={handleEdit}
               >
                 <img src={editIcon} alt="edit icon" className="mr-3 h-5 w-5" />
                 Edit
-              </a>
+              </button>
             </MenuItem>
             <MenuItem>
-              <a
-                className="flex flex-row items-center px-4 py-1.5 text-neutral-50 data-focus:bg-blue-100"
-                href="#"
+              <button
+                className="flex flex-row items-center px-4 py-1.5 text-neutral-50"
+                onClick={handleDelete}
               >
                 <img
                   src={deleteIcon}
@@ -51,7 +62,7 @@ export const Card = ({ task }: CardProps) => {
                   className="mr-3 h-5 w-5"
                 />
                 Delete
-              </a>
+              </button>
             </MenuItem>
           </MenuItems>
         </Menu>

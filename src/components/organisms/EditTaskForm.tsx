@@ -9,14 +9,13 @@ import { MultiListBoxField } from "../molecules/MultiListBoxField";
 import { TaskTagOptions } from "../../utils/taskTagOptions";
 import { PointEstimateOptions } from "../../utils/pointEstimateOptions";
 import { DatePickerField } from "../molecules/DatePickerField";
-import { useCreateTask } from "../../hooks/useCreateTask";
 import {
-  Status,
   TaskTag,
-  type CreateTaskInput,
-  type PointEstimate,
+  type Task,
+  type UpdateTaskInput,
 } from "../../__generated__/graphql";
 import { taskSchema } from "../../schemas/taskSchema";
+import { useUpdateTask } from "../../hooks/useEditTask";
 
 const ErrorMessage = ({ name }: { name: string }) => {
   const {
@@ -29,33 +28,41 @@ const ErrorMessage = ({ name }: { name: string }) => {
   ) : null;
 };
 
-type AddTaskFormProps = {
+type EditTaskFormProps = {
+  task: Task;
   onClose: () => void;
 };
 
-export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
+export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
+  const { updateTask, loading, error } = useUpdateTask();
+
+  // Format dueDate for the date input (YYYY-MM-DD)
+  const formatDueDate = (dateString: string) => {
+    return new Date(dateString).toISOString().split("T")[0];
+  };
+
   const methods = useForm({
     mode: "onChange",
     resolver: zodResolver(taskSchema),
     defaultValues: {
-      pointEstimate: "" as PointEstimate,
-      assigneeId: "",
-      name: "",
-      dueDate: "",
-      tags: [] as TaskTag[],
-      status: Status.Backlog,
+      pointEstimate: task.pointEstimate,
+      assigneeId: task.assignee?.id || "",
+      name: task.name,
+      dueDate: task.dueDate ? formatDueDate(task.dueDate) : "",
+      tags: task.tags as TaskTag[],
+      status: task.status,
     },
   });
 
-  const { createTask, loading, error } = useCreateTask();
-  const {
-    formState: { isValid, isDirty },
-  } = methods;
+  type TaskFormValues = Omit<UpdateTaskInput, "id">;
 
-  const handleSubmit = async (values: CreateTaskInput) => {
+  const handleSubmit = async (formValues: TaskFormValues) => {
     try {
-      console.log("Form submitted:", values);
-      await createTask(values);
+      console.log("Form submitted:", formValues);
+      await updateTask({
+        id: task.id,
+        ...formValues,
+      });
       methods.reset();
       onClose();
     } catch (e) {
@@ -67,8 +74,6 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     methods.reset();
     onClose();
   };
-
-  const isFormValid = isValid && isDirty;
 
   return (
     <FormProvider {...methods}>
@@ -128,10 +133,10 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
           </button>
           <button
             type="submit"
-            className={`rounded-lg p-2 font-normal text-neutral-50 ${isFormValid ? "bg-primary-300" : "bg-primary-100 cursor-not-allowed"}`}
-            disabled={loading || !isFormValid}
+            className="bg-primary-300 rounded-lg p-2 font-normal text-neutral-50"
+            disabled={loading}
           >
-            {loading ? "Creating" : "Create"}
+            {loading ? "Updating" : "Update"}
           </button>
         </div>
       </form>

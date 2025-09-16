@@ -6,7 +6,7 @@ import DashboardTab from "../../assets/dashboard-tab.svg";
 import ListTab from "../../assets/list-tab.svg";
 import { classNames } from "../../utils/utils";
 import plusBtn from "../../assets/plus-btn.svg";
-import { Modal } from "../organisms/Modal";
+import { Modal } from "../molecules/Modal";
 import { useState } from "react";
 import { AddTaskForm } from "../organisms/AddTaskForm";
 
@@ -84,7 +84,7 @@ export const Dashboard: React.FC = () => {
         </TabPanels>
       </TabGroup>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <AddTaskForm />
+        <AddTaskForm onClose={() => setIsOpen(false)} />
       </Modal>
     </div>
   );

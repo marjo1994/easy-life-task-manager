@@ -3,7 +3,7 @@ import { Sidebar } from "./components/organisms/Sidebar";
 import { SearchBar } from "./components/organisms/SearchBar";
 import { FooterNav } from "./components/organisms/FooterNav";
 import { ErrorBoundary } from "react-error-boundary";
-import { ErrorFallback } from "./components/organisms/ErrorFallback";
+import { ErrorFallback } from "./components/molecules/ErrorFallback";
 
 type LayoutProps = {
   children: ReactNode;

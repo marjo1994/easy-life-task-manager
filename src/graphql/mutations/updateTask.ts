@@ -5,10 +5,12 @@ mutation UpdateTask($input: UpdateTaskInput!) {
   updateTask(input: $input) {
     id
     name
+    status
     pointEstimate
     tags
     dueDate
     assignee {
+      id
       fullName
     }
   }

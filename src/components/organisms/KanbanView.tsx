@@ -1,8 +1,43 @@
-import { Card } from "../molecules/Card";
-import type { GetTasksQuery } from "../../__generated__/graphql";
+import type { GetTasksQuery, Task } from "../../__generated__/graphql";
 import { STATUS_LABELS } from "../../utils/statusLabels";
+import { useState } from "react";
+import { Modal } from "../molecules/Modal";
+import { Card } from "../molecules/Card";
+import { EditTaskForm } from "./EditTaskForm";
+import { DeleteModal } from "../molecules/DeleteModal";
+import { useDeleteTask } from "../../hooks/useDeleteTask";
 
 export const KanbanView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
+
+  const { deleteTask, loading, error } = useDeleteTask();
+
+  const handleEditClick = (task: Task) => {
+    setEditingTask(task);
+    setIsEditModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsEditModalOpen(false);
+    setEditingTask(null);
+  };
+
+  const handleDeleteClick = (task: Task) => {
+    setTaskToDelete(task);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (taskToDelete) {
+      await deleteTask({ id: taskToDelete.id });
+      setIsDeleteModalOpen(false);
+      setTaskToDelete(null);
+    }
+  };
+
   const groupedTasks = tasks.reduce<Record<string, any[]>>((acc, task) => {
     const status = task.status;
     if (!acc[status]) acc[status] = [];
@@ -23,12 +58,30 @@ export const KanbanView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
           <div className="flex-1 overflow-y-auto">
             <div className="flex flex-col gap-4">
               {tasks.map((task) => (
-                <Card key={task.id} task={task} />
+                <Card
+                  key={task.id}
+                  task={task}
+                  onEditClick={() => handleEditClick(task)}
+                  onDeleteClick={() => handleDeleteClick(task)}
+                />
               ))}
             </div>
           </div>
         </div>
       ))}
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+        loading={loading}
+        error={error?.message}
+      />
+
+      <Modal isOpen={isEditModalOpen} onClose={handleCloseModal}>
+        {editingTask && (
+          <EditTaskForm task={editingTask} onClose={handleCloseModal} />
+        )}
+      </Modal>
     </div>
   );
 };
