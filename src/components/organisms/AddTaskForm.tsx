@@ -2,20 +2,29 @@ import { FormProvider, useForm } from "react-hook-form";
 //import { zodResolver } from "@hookform/resolvers/zod";
 import estimateicon from "../../assets/control-estimate-icon.svg";
 import labelicon from "../../assets/label-icon.svg";
-//import duedateIcon from "../../assets/due-date-icon.svg";
+import duedateIcon from "../../assets/due-date-icon.svg";
 import { ListBoxField } from "../molecules/ListBoxField";
 import { UserSelector } from "../molecules/userSelector";
 import { MultiListBoxField } from "../molecules/MultiListBoxField";
 import { TaskTagOptions } from "../../utils/taskTagOptions";
 import { PointEstimateOptions } from "../../utils/pointEstimateOptions";
+import { DatePickerField } from "../molecules/DatePickerField";
 
 type AddTaskFormProps = {
   onSubmit: () => void;
 };
 
 export const AddTaskForm = ({ onSubmit }: AddTaskFormProps) => {
-  const methods = useForm({ mode: "onChange" });
-
+  const methods = useForm({
+    mode: "onChange",
+    defaultValues: {
+      estimate: "",
+      assignee: "",
+      name: "",
+      dueDate: "",
+      label: "",
+    },
+  });
   return (
     <FormProvider {...methods}>
       <form
@@ -47,20 +56,16 @@ export const AddTaskForm = ({ onSubmit }: AddTaskFormProps) => {
           <UserSelector />
 
           <MultiListBoxField
-            name="labels"
+            name="label"
             options={TaskTagOptions}
             icon={labelicon}
           />
 
-          {/*<div className="flex flex-row items-center rounded-sm bg-neutral-100/10 px-4 py-1">
-            <img src={duedateIcon} alt="Due Date Icon" className="mr-2" />
-            <input
-              type="date"
-              {...methods.register("dueDate")}
-              placeholder="Due Date"
-              className="bg-transparent text-neutral-50 focus:outline-none"
-            />
-          </div>*/}
+          <DatePickerField
+            name="dueDate"
+            icon={duedateIcon}
+            placeholder="Due Date"
+          />
         </div>
         <div className="flex justify-end">
           <button

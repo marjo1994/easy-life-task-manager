@@ -27,7 +27,7 @@ export const Dashboard: React.FC = () => {
       <TabGroup>
         <TabList
           className={classNames(
-            "mx-8 flex space-x-2 rounded-[10px] bg-neutral-300",
+            "mx-8 flex rounded-[10px] bg-neutral-300",
             "lg:mx-0 lg:space-x-2 lg:rounded-none lg:bg-transparent"
           )}
         >
@@ -36,7 +36,7 @@ export const Dashboard: React.FC = () => {
               key={tab.id}
               className={({ selected }) =>
                 classNames(
-                  "px-7 py-2 text-center lg:px-2 lg:py-2",
+                  "px-7 py-3 text-center lg:px-2 lg:py-2",
                   "flex-1 lg:flex-none",
                   selected
                     ? "lg:border-primary-300 rounded-lg bg-neutral-100 lg:rounded-md lg:border lg:bg-transparent"
@@ -72,7 +72,7 @@ export const Dashboard: React.FC = () => {
           </button>
         </TabList>
 
-        <TabPanels className="mt-4 ml-4 lg:ml-0">
+        <TabPanels className="mt-6 ml-4 lg:mt-4 lg:ml-0">
           <TabPanel className="h-[calc(100vh-160px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
             <KanbanView tasks={tasks} />
           </TabPanel>
