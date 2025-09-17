@@ -16,7 +16,7 @@ export const Dashboard: React.FC = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  //console.log("data", tasks);
+  if (!tasks) return <p>Not found data</p>;
 
   const tabs = [
     { id: 0, label: "Dashboard", icon: DashboardTab },
@@ -24,7 +24,7 @@ export const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="mt-4 h-full">
+    <div className="mt-4 h-full xl:mt-8">
       <TabGroup>
         <TabList
           className={classNames(
@@ -74,11 +74,11 @@ export const Dashboard: React.FC = () => {
         </TabList>
 
         <TabPanels className="mt-6 ml-4 lg:mt-4 lg:ml-0">
-          <TabPanel className="h-[calc(100vh-160px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
+          <TabPanel className="h-[calc(100vh-180px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
             <KanbanView tasks={tasks} />
           </TabPanel>
 
-          <TabPanel className="h-[calc(100vh-160px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
+          <TabPanel className="h-[calc(100vh-180px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
             <TaskListView tasks={tasks} />
           </TabPanel>
         </TabPanels>

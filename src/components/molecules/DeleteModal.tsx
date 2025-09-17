@@ -21,7 +21,7 @@ export const DeleteModal = ({
       className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-400/80 backdrop-blur-sm"
       onClick={onClose}
     >
-      <div className="h-[189px] w-[279px] rounded-[14px] bg-neutral-200">
+      <div className="h-auto w-[279px] rounded-[14px] bg-neutral-200">
         <div className="flex flex-col items-center justify-center px-6 py-5">
           <h1 className="text-body-l font-semibold text-neutral-50">
             Delete Task
@@ -39,14 +39,14 @@ export const DeleteModal = ({
         <div className="flex flex-row justify-around border-t border-t-neutral-100">
           <button
             type="button"
-            className="text-body-s p-3 text-blue-200"
+            className="text-body-s flex w-full flex-1 justify-center p-3 text-blue-200"
             onClick={onClose}
           >
             Go Back
           </button>
           <button
             type="button"
-            className="text-body-s p-3 text-blue-200"
+            className="text-body-s flex w-full flex-1 justify-center p-3 text-blue-200"
             onClick={onConfirm}
           >
             {loading ? "Deleting..." : "Delete"}
