@@ -48,9 +48,6 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
   });
 
   const { createTask, loading, error } = useCreateTask();
-  const {
-    formState: { isValid, isDirty },
-  } = methods;
 
   const handleSubmit = async (values: CreateTaskInput) => {
     try {
@@ -68,7 +65,7 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     onClose();
   };
 
-  const isFormValid = isValid && isDirty;
+  const isFormValid = taskSchema.safeParse(methods.watch()).success;
 
   return (
     <FormProvider {...methods}>
@@ -84,7 +81,7 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
           <ErrorMessage name="name" />
         </div>
 
-        <div className="mb-6 flex flex-row items-start gap-4 text-neutral-50">
+        <div className="mb-6 flex flex-row items-center gap-4 text-neutral-50">
           <div className="flex flex-1 flex-col">
             <ListBoxField
               name="pointEstimate"

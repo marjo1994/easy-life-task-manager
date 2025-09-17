@@ -15,15 +15,18 @@ export const DatePickerField = ({
 }: DatePickerFieldProps) => {
   const { watch, setValue, register } = useFormContext();
   const dateValue = watch(name);
-  const selectedDate = dateValue ? new Date(dateValue) : null;
 
   const handleDateChange = (date: Date | null) => {
-    const isoDate = date ? date.toISOString().split("T")[0] : null;
-    setValue(name, isoDate);
+    //const isoDate = date ? date.toISOString().split("T")[0] : null;
+    //setValue(name, isoDate);
+    setValue(name, date ? date.toISOString() : null);
   };
+  const selectedDate = dateValue ? new Date(dateValue) : null;
+
+  //console.log("selectedValue", selectedDate);
 
   return (
-    <div className="flex flex-1 flex-row items-center rounded-sm bg-neutral-100/10 px-4 py-1">
+    <div className="flex flex-row items-center rounded-sm bg-neutral-100/10 px-4 py-1">
       {icon && <img src={icon} alt="Date icon" className="mr-2" />}
 
       <DatePicker

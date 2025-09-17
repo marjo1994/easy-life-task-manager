@@ -42,7 +42,7 @@ export const MultiListBoxField = ({
     <>
       <Listbox value={values} onChange={() => {}} multiple>
         <ListboxButton
-          className={`flex flex-1 flex-row items-center rounded-sm ${selectedOptions.length > 0 ? "bg-transparent p-0" : "bg-neutral-100/10 px-4 py-1"}`}
+          className={`flex flex-row items-center rounded-sm ${selectedOptions.length > 0 ? "bg-transparent p-0" : "bg-neutral-100/10 px-4 py-1"}`}
         >
           {selectedOptions.length > 0 ? (
             <div className="flex flex-wrap items-center gap-1">

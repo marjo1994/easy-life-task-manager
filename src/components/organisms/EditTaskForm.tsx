@@ -36,7 +36,6 @@ type EditTaskFormProps = {
 export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
   const { updateTask, loading, error } = useUpdateTask();
 
-  // Format dueDate for the date input (YYYY-MM-DD)
   const formatDueDate = (dateString: string) => {
     return new Date(dateString).toISOString().split("T")[0];
   };
@@ -89,7 +88,7 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
           <ErrorMessage name="name" />
         </div>
 
-        <div className="mb-6 flex flex-row items-start gap-4 text-neutral-50">
+        <div className="mb-6 flex flex-row items-center gap-4 text-neutral-50">
           <div className="flex flex-1 flex-col">
             <ListBoxField
               name="pointEstimate"

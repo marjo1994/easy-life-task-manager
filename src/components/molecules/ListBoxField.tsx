@@ -37,7 +37,7 @@ export const ListBoxField = ({
     <>
       <Listbox value={value} onChange={(val) => setValue(name, val)}>
         <ListboxButton
-          className={`text-body- flex flex-1 flex-row items-center rounded-sm ${isOptionSelected ? "bg-transparent p-0" : "bg-neutral-100/10 px-4 py-1"}`}
+          className={`text-body- flex flex-row items-center rounded-sm ${isOptionSelected ? "bg-transparent p-0" : "bg-neutral-100/10 px-4 py-1"}`}
         >
           {icon && <img src={icon} alt={`${name} icon`} className="mr-2" />}
           {options.find((opt) => opt.value === value)?.label ||
