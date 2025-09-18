@@ -1,9 +1,10 @@
 import { useProfile } from "../../hooks/useProfile";
+import { LoadingState } from "../molecules/Loading";
 
 export const Profile = () => {
   const { profile, loading, error } = useProfile();
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingState />;
   if (error) return <p>Error: {error.message}</p>;
   if (!profile) return <p>No profile found</p>;
 

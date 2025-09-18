@@ -10,6 +10,7 @@ export const GET_TASKS = gql(`
       status
       tags
       assignee {
+        id
         fullName
       }
     }

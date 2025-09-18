@@ -18,7 +18,7 @@ type Documents = {
     "\n mutation DeleteTask($input: DeleteTaskInput!) {\n  deleteTask(input: $input) {\n    id\n  }\n}\n": typeof types.DeleteTaskDocument,
     "\nmutation UpdateTask($input: UpdateTaskInput!) {\n  updateTask(input: $input) {\n    id\n    name\n    status\n    pointEstimate\n    tags\n    dueDate\n    assignee {\n      id\n      fullName\n    }\n  }\n}": typeof types.UpdateTaskDocument,
     "query Profile {\n  profile {\n    id\n    fullName\n    email\n    createdAt\n    updatedAt\n    type\n  }\n}": typeof types.ProfileDocument,
-    "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        fullName\n      }\n    }\n  }\n": typeof types.GetTasksDocument,
+    "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        id\n        fullName\n      }\n    }\n  }\n": typeof types.GetTasksDocument,
     "\n  query GetUsers {\n    users {\n      id\n      fullName\n      avatar\n    }\n  }\n": typeof types.GetUsersDocument,
 };
 const documents: Documents = {
@@ -26,7 +26,7 @@ const documents: Documents = {
     "\n mutation DeleteTask($input: DeleteTaskInput!) {\n  deleteTask(input: $input) {\n    id\n  }\n}\n": types.DeleteTaskDocument,
     "\nmutation UpdateTask($input: UpdateTaskInput!) {\n  updateTask(input: $input) {\n    id\n    name\n    status\n    pointEstimate\n    tags\n    dueDate\n    assignee {\n      id\n      fullName\n    }\n  }\n}": types.UpdateTaskDocument,
     "query Profile {\n  profile {\n    id\n    fullName\n    email\n    createdAt\n    updatedAt\n    type\n  }\n}": types.ProfileDocument,
-    "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        fullName\n      }\n    }\n  }\n": types.GetTasksDocument,
+    "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        id\n        fullName\n      }\n    }\n  }\n": types.GetTasksDocument,
     "\n  query GetUsers {\n    users {\n      id\n      fullName\n      avatar\n    }\n  }\n": types.GetUsersDocument,
 };
 
@@ -63,7 +63,7 @@ export function gql(source: "query Profile {\n  profile {\n    id\n    fullName\
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        fullName\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        fullName\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        id\n        fullName\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      id\n      name\n      pointEstimate\n      dueDate\n      status\n      tags\n      assignee {\n        id\n        fullName\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

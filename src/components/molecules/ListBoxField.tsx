@@ -5,9 +5,9 @@ import {
   ListboxOption,
 } from "@headlessui/react";
 import { useFormContext } from "react-hook-form";
-import avatarImg from "../../assets/avatar.png";
 
 type Option = {
+  avatar?: string;
   value: string;
   label: string;
   icon?: string;
@@ -32,6 +32,8 @@ export const ListBoxField = ({
   const value = watch(name);
 
   const isOptionSelected = value && value !== options[0]?.value;
+  const selectedOption =
+    options.find((opt) => opt.value === value) || options[0];
 
   return (
     <>
@@ -39,9 +41,20 @@ export const ListBoxField = ({
         <ListboxButton
           className={`text-body- flex flex-row items-center rounded-sm ${isOptionSelected ? "bg-transparent p-0" : "bg-neutral-100/10 px-4 py-1"}`}
         >
-          {icon && <img src={icon} alt={`${name} icon`} className="mr-2" />}
-          {options.find((opt) => opt.value === value)?.label ||
-            options[0].label}
+          {isOptionSelected && selectedOption.avatar && (
+            <img
+              src={selectedOption.avatar}
+              alt={selectedOption.label}
+              className="mr-2 h-6 w-6 rounded-full object-cover"
+            />
+          )}
+
+          {/* Mostrar icono solo cuando NO hay selección y hay icono */}
+          {!isOptionSelected && icon && (
+            <img src={icon} alt={`${name} icon`} className="mr-2" />
+          )}
+
+          {selectedOption.label}
         </ListboxButton>
         {!disabled && (
           <ListboxOptions
@@ -57,8 +70,12 @@ export const ListBoxField = ({
                 {idx != 0 && icon && !avatar && (
                   <img src={icon} alt={`${name} icon`} className="mr-2" />
                 )}
-                {idx != 0 && avatar && (
-                  <img src={avatarImg} alt={option.label} className="mr-2" />
+                {idx !== 0 && avatar && option.avatar && (
+                  <img
+                    src={option.avatar}
+                    alt={option.label}
+                    className="mr-2 h-6 w-6 rounded-full object-cover"
+                  />
                 )}
                 {option.label}
               </ListboxOption>

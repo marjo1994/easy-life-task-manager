@@ -9,12 +9,13 @@ import plusBtn from "../../assets/plus-btn.svg";
 import { Modal } from "../molecules/Modal";
 import { useState } from "react";
 import { AddTaskForm } from "../organisms/AddTaskForm";
+import { LoadingState } from "../molecules/Loading";
 
 export const Dashboard: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { tasks, loading, error } = useTasks();
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingState />;
   if (error) return <p>Error: {error.message}</p>;
   if (!tasks) return <p>Not found data</p>;
 

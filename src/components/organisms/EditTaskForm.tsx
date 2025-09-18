@@ -88,7 +88,7 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
           <ErrorMessage name="name" />
         </div>
 
-        <div className="mb-6 flex flex-row items-center gap-4 text-neutral-50">
+        <div className="mb-6 grid grid-cols-1 gap-4 text-neutral-50 md:grid-cols-[1fr_1.2fr_0.8fr_1.2fr]">
           <div className="flex flex-1 flex-col">
             <ListBoxField
               name="pointEstimate"

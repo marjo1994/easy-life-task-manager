@@ -16,7 +16,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       onClick={onClose}
     >
       <div
-        className="relative h-auto w-[65%] rounded-lg bg-neutral-200 p-4 text-neutral-100 shadow-lg lg:min-h-[184px] lg:w-[580px]"
+        className="relative h-full w-full rounded-lg bg-neutral-400 p-4 text-neutral-100 shadow-lg md:h-auto md:w-[65%] lg:min-h-[184px] lg:w-[653px] lg:bg-neutral-200"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

@@ -12,7 +12,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="flex w-full flex-row rounded-2xl bg-neutral-300 px-6 py-2 lg:py-3">
+    <div className="flex w-full flex-row rounded-2xl bg-neutral-300 px-6 py-3">
       <div className="flex w-full flex-row items-center">
         <img src={searchIcon} alt="search icon" className="mr-6 h-6 w-6" />
         <input

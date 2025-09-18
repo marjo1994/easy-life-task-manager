@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker";
 import { useQuery } from "@apollo/client/react";
 import { GET_USERS } from "../graphql/queries/getUsers";
 
@@ -8,6 +9,7 @@ export function useUsers() {
     data?.users?.map((user) => ({
       value: user.id,
       label: user.fullName,
+      avatar: faker.image.avatar(),
     })) || [];
 
   return {
