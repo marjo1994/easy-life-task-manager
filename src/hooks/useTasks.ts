@@ -1,12 +1,10 @@
 import { useQuery } from "@apollo/client/react";
 import { GET_TASKS } from "../graphql/queries/getTasks";
-import { useSearchStore } from "../store/searchStore";
+import type { FilterTaskInput } from "../__generated__/graphql";
 
-export function useTasks() {
-  const { searchTerm } = useSearchStore();
-  const input = searchTerm ? { name: searchTerm } : {};
+export const useTasks = (filters: FilterTaskInput = {}) => {
   const { data, loading, error, refetch } = useQuery(GET_TASKS, {
-    variables: { input },
+    variables: { input: filters },
     fetchPolicy: "cache-and-network",
   });
 
@@ -16,4 +14,4 @@ export function useTasks() {
     error,
     refetch,
   };
-}
+};

@@ -1,19 +1,47 @@
+import { useTasks } from "../../hooks/useTasks";
+import { useSearchFiltes } from "../../hooks/useSearchFilters";
 import { TaskListView } from "../organisms/ListView";
 import { KanbanView } from "../organisms/KanbanView";
-import { useTasks } from "../../hooks/useTasks";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import DashboardTab from "../../assets/dashboard-tab.svg";
 import ListTab from "../../assets/list-tab.svg";
 import { classNames } from "../../utils/utils";
 import plusBtn from "../../assets/plus-btn.svg";
 import { Modal } from "../molecules/Modal";
-import { useState } from "react";
 import { AddTaskForm } from "../organisms/AddTaskForm";
 import { LoadingState } from "../molecules/Loading";
+import { useState } from "react";
+
+/*const normalize = (str: string) => {
+  return str.replace(/\s+/g, "").toLowerCase();
+};*/
 
 export const Dashboard: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { tasks, loading, error } = useTasks();
+  const backendFilters = useSearchFiltes();
+  const { tasks, loading, error } = useTasks(backendFilters);
+
+  /*console.log("Backend filters:", backendFilters);
+  console.log("Frontend filters:", frontendFilters);
+  console.log("Tasks from backend:", tasks);
+
+  const filteredTasks = useMemo(() => {
+    if (!tasks) return [];
+
+    if (!frontendFilters.searchText) {
+      return tasks;
+    }
+
+    console.log("Filtering with search text:", frontendFilters.searchText);
+
+    const normalizedSearch = normalize(frontendFilters.searchText);
+    console.log("normalizeSearch", normalizedSearch);
+    return tasks.filter(
+      (task) => task.name && normalize(task.name).includes(normalizedSearch)
+    );
+  }, [tasks, frontendFilters.searchText]);
+
+  console.log(filteredTasks, "filteredTasks");*/
 
   if (loading) return <LoadingState />;
   if (error) return <p>Error: {error.message}</p>;

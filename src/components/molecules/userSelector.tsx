@@ -1,7 +1,6 @@
 import { ListBoxField } from "./ListBoxField";
 import { useUsers } from "../../hooks/useUsers";
 import assigneeicon from "../../assets/assignee-icon.svg";
-import { useFormContext } from "react-hook-form";
 
 export const UserSelector = () => {
   const { usersOptions, loading, error } = useUsers();

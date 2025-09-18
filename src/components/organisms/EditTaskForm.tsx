@@ -57,7 +57,7 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
 
   const handleSubmit = async (formValues: TaskFormValues) => {
     try {
-      console.log("Form submitted:", formValues);
+      //console.log("Form submitted:", formValues);
       await updateTask({
         id: task.id,
         ...formValues,
