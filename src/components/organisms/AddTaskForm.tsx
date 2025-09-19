@@ -70,6 +70,22 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
         {error && <p className="text-primary-200 mt-2">{error.message}</p>}
+        <div className="mb-6 flex justify-between lg:hidden">
+          <button
+            type="button"
+            className="mr-6 bg-transparent p-2 font-normal text-neutral-100"
+            onClick={handleCancel}
+          >
+            x
+          </button>
+          <button
+            type="submit"
+            className={`rounded-lg bg-transparent p-2 font-normal text-neutral-100 ${isFormValid ? "bg-primary-300" : "bg-primary-100 cursor-not-allowed"}`}
+            disabled={loading || !isFormValid}
+          >
+            {loading ? "Creating" : "Create"}
+          </button>
+        </div>
         <div className="mb-6">
           <label className="hidden">Task Name</label>
           <input
@@ -114,7 +130,7 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
             <ErrorMessage name="dueDate" />
           </div>
         </div>
-        <div className="flex justify-end">
+        <div className="hidden justify-end md:flex">
           <button
             type="button"
             className="mr-6 bg-transparent p-2 font-normal text-neutral-50"

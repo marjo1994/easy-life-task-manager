@@ -31,7 +31,7 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
   return (
     <div className="rounded-xl bg-neutral-300 p-3 text-neutral-50">
       <div className="mb-3 flex justify-between">
-        <span className="text-body-l font-normal xl:font-semibold">
+        <span className="text-headline-s-mobile xl:text-body-l font-normal xl:font-semibold">
           {task.name}
         </span>
         <Menu>
@@ -45,7 +45,7 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
             <MenuItem
               as="button"
               onClick={handleEdit}
-              className="mb-2 flex w-full flex-row items-center px-4 py-1.5 text-left text-neutral-50"
+              className="mb-2 flex w-full flex-row items-center px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100"
             >
               <img src={editIcon} alt="edit icon" className="mr-2.5 h-5 w-5" />
               Edit
@@ -54,7 +54,7 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
             <MenuItem
               as="button"
               onClick={handleDelete}
-              className="flex w-full flex-row items-center px-4 py-1.5 text-left text-neutral-50"
+              className="flex w-full flex-row items-center px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100"
             >
               <img
                 src={deleteIcon}
@@ -66,13 +66,13 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
           </MenuItems>
         </Menu>
       </div>
-      <div className="mb-4 flex justify-between">
-        <span className="text-body-m mr-1 flex flex-row font-normal xl:font-semibold">
+      <div className="mb-4 flex items-center justify-between">
+        <span className="text-body-s-mobile xl:text-body-m mr-1 flex flex-row font-normal xl:font-semibold">
           {`${pointEstimateToNumber(task.pointEstimate)}${"\u00A0"} `}
           <span className="flex xl:hidden">Pts</span>
           <span className="hidden xl:flex">Points</span>
         </span>
-        <div className="text-body-m flex flex-row rounded-sm bg-neutral-100/10 px-4 py-1 font-normal text-neutral-50 xl:font-semibold">
+        <div className="text-body-s-mobile xl:text-body-m flex flex-row items-center rounded-sm bg-neutral-100/10 px-4 py-1 font-normal text-neutral-50 xl:font-semibold">
           <img className="mr-2.5" src={alarmIcon} alt="alarm icon" />
           {formatDate(task.dueDate)}
         </div>
@@ -84,7 +84,7 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
             return (
               <span
                 key={tag}
-                className={`text-body-m rounded-sm px-4 py-1 font-semibold ${bg} ${text}`}
+                className={`text-body-m rounded-sm px-4 py-1 xl:font-semibold ${bg} ${text}`}
               >
                 {tag}
               </span>

@@ -63,7 +63,7 @@ export const MultiListBoxField = ({
           )}
         </ListboxButton>
         <ListboxOptions
-          anchor="bottom"
+          anchor="bottom start"
           className="z-50 mt-2 rounded-lg border border-neutral-100 bg-neutral-200 py-2"
         >
           {options.map((opt) => (

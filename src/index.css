@@ -39,6 +39,11 @@
   filter: brightness(0) saturate(100%) invert(40%) sepia(79%) saturate(807%)
     hue-rotate(325deg) brightness(92%) contrast(84%);
 }
+
+.custom-nav-icon:hover {
+  @apply filter-custom-red;
+}
+
 @utility text-heading-xl {
   font-size: 4rem;
   line-height: 5.5rem;

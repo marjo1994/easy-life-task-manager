@@ -2,8 +2,6 @@ import { NavLink } from "react-router-dom";
 import ListIcon from "../../assets/list-icon.svg";
 import RavnLogo from "../../assets/ravn-logo.svg";
 import DashboardIcon from "../../assets/dashboard-icon.svg";
-import DashboardIconActive from "../../assets/dashboard-icon-active.svg";
-import ListIconActive from "../../assets/list-icon-active-2.svg";
 import ActiveIndicator from "../../assets/active-indicator.svg";
 
 export const Sidebar = () => {
@@ -14,7 +12,7 @@ export const Sidebar = () => {
       </div>
       <NavLink
         to="/"
-        className="relative flex items-center px-5 py-4"
+        className="custom-nav-icon relative flex items-center px-5 py-4"
         style={({ isActive }) =>
           isActive
             ? {
@@ -27,12 +25,12 @@ export const Sidebar = () => {
         {({ isActive }) => (
           <>
             <img
-              src={isActive ? DashboardIconActive : DashboardIcon}
+              src={DashboardIcon}
               alt="Dashboard Icon"
-              className="mr-4"
+              className={`mr-4 ${isActive ? "filter-custom-red" : ""}`}
             />
             <span
-              className={`text-body-m font-semibold ${
+              className={`text-body-m hover:text-primary-300 font-semibold ${
                 isActive ? "text-primary-300" : "text-neutral-100"
               }`}
             >
@@ -50,7 +48,7 @@ export const Sidebar = () => {
       </NavLink>
       <NavLink
         to="/my-tasks"
-        className="relative flex items-center px-5 py-4"
+        className="custom-nav-icon relative flex items-center px-5 py-4"
         style={({ isActive }) =>
           isActive
             ? {
@@ -63,12 +61,12 @@ export const Sidebar = () => {
         {({ isActive }) => (
           <>
             <img
-              src={isActive ? ListIconActive : ListIcon}
+              src={ListIcon}
               alt="List Icon"
-              className="mr-4"
+              className={`mr-4 ${isActive ? "filter-custom-red" : ""}`}
             />
             <span
-              className={`text-body-m font-semibold ${
+              className={`text-body-m hover:text-primary-300 font-semibold ${
                 isActive ? "text-primary-300" : "text-neutral-100"
               }`}
             >

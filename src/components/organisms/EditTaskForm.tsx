@@ -9,6 +9,7 @@ import { MultiListBoxField } from "../molecules/MultiListBoxField";
 import { TaskTagOptions } from "../../utils/taskTagOptions";
 import { PointEstimateOptions } from "../../utils/pointEstimateOptions";
 import { DatePickerField } from "../molecules/DatePickerField";
+import closeBtn from "../../assets/close-btn.svg";
 import {
   TaskTag,
   type Task,
@@ -35,10 +36,6 @@ type EditTaskFormProps = {
 
 export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
   const { updateTask, loading, error } = useUpdateTask();
-
-  /*const formatDueDate = (dateString: string) => {
-    return new Date(dateString).toISOString().split("T")[0];
-  };*/
 
   const methods = useForm({
     mode: "onChange",
@@ -77,6 +74,22 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
         {error && <p className="text-primary-200 mt-2">{error.message}</p>}
+        <div className="mb-6 flex justify-between lg:hidden">
+          <button
+            type="button"
+            className="mr-6 bg-transparent p-2 font-normal text-neutral-100"
+            onClick={handleCancel}
+          >
+            {closeBtn}
+          </button>
+          <button
+            type="submit"
+            className="rounded-lg bg-transparent p-2 font-normal text-neutral-100"
+            disabled={loading}
+          >
+            {loading ? "Updating" : "Update"}
+          </button>
+        </div>
         <div className="mb-6">
           <label className="hidden">Task Name</label>
           <input
@@ -121,7 +134,7 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
             <ErrorMessage name="dueDate" />
           </div>
         </div>
-        <div className="flex justify-end">
+        <div className="hidden justify-end md:flex">
           <button
             type="button"
             className="mr-6 bg-transparent p-2 font-normal text-neutral-50"
