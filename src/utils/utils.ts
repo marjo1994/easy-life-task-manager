@@ -1,26 +1,38 @@
+import { format, parseISO, isValid } from "date-fns";
+
 export const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
 };
 
-const MS_IN_DAY = 1000 * 60 * 60 * 24;
+export const normalizeDate = (date: Date): Date => {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+};
 
-export const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
+const MS_IN_DAY = 24 * 60 * 60 * 1000;
 
-  const normalize = (d: Date) =>
-    new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+export const formatDate = (isoString: string): string => {
+  if (!isoString) return "No date";
 
-  const todayTime = normalize(new Date());
-  const dateTime = normalize(date);
+  const dateOnly = isoString.split("T")[0];
+  const date = parseISO(dateOnly);
 
-  if (dateTime === todayTime) return "TODAY";
-  if (dateTime === todayTime - MS_IN_DAY) return "YESTERDAY";
+  if (!isValid(date)) {
+    return "Invalid date";
+  }
 
-  const day = date.toLocaleDateString("en-GB", { day: "2-digit" });
-  const month = date
-    .toLocaleDateString("en-GB", { month: "long" })
-    .toUpperCase();
-  const year = date.toLocaleDateString("en-GB", { year: "numeric" });
+  const today = new Date();
+  const todayNormalized = normalizeDate(today);
+  const targetNormalized = normalizeDate(date);
+
+  const diffTime = targetNormalized.getTime() - todayNormalized.getTime();
+  const diffDays = Math.round(diffTime / MS_IN_DAY);
+
+  if (diffDays === 0) return "TODAY";
+  if (diffDays === -1) return "YESTERDAY";
+
+  const day = format(date, "dd");
+  const month = format(date, "MMMM").toUpperCase();
+  const year = format(date, "yyyy");
 
   return `${day} ${month}, ${year}`;
 };

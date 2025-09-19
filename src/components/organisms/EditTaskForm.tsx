@@ -36,9 +36,9 @@ type EditTaskFormProps = {
 export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
   const { updateTask, loading, error } = useUpdateTask();
 
-  const formatDueDate = (dateString: string) => {
+  /*const formatDueDate = (dateString: string) => {
     return new Date(dateString).toISOString().split("T")[0];
-  };
+  };*/
 
   const methods = useForm({
     mode: "onChange",
@@ -47,7 +47,7 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
       pointEstimate: task.pointEstimate,
       assigneeId: task.assignee?.id || "",
       name: task.name,
-      dueDate: task.dueDate ? formatDueDate(task.dueDate) : "",
+      dueDate: task.dueDate ? task.dueDate : "",
       tags: task.tags as TaskTag[],
       status: task.status,
     },
@@ -57,7 +57,6 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
 
   const handleSubmit = async (formValues: TaskFormValues) => {
     try {
-      //console.log("Form submitted:", formValues);
       await updateTask({
         id: task.id,
         ...formValues,

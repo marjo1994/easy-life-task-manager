@@ -67,10 +67,10 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
         </Menu>
       </div>
       <div className="mb-4 flex justify-between">
-        <span className="text-body-m flex flex-row font-normal xl:font-semibold">
-          {pointEstimateToNumber(task.pointEstimate)}
-          <span className="flex xl:hidden">{` Pts`}</span>
-          <span className="hidden xl:flex">{` Points`}</span>
+        <span className="text-body-m mr-1 flex flex-row font-normal xl:font-semibold">
+          {`${pointEstimateToNumber(task.pointEstimate)}${"\u00A0"} `}
+          <span className="flex xl:hidden">Pts</span>
+          <span className="hidden xl:flex">Points</span>
         </span>
         <div className="text-body-m flex flex-row rounded-sm bg-neutral-100/10 px-4 py-1 font-normal text-neutral-50 xl:font-semibold">
           <img className="mr-2.5" src={alarmIcon} alt="alarm icon" />

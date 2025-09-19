@@ -17,6 +17,7 @@
     "@fontsource/inter": "^5.2.6",
     "@headlessui/react": "^2.2.7",
     "@hookform/resolvers": "^5.2.2",
+    "date-fns": "^4.1.0",
     "graphql": "^16.11.0",
     "react": "^19.1.1",
     "react-datepicker": "^8.7.0",

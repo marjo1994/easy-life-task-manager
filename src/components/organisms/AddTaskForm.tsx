@@ -51,7 +51,6 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
 
   const handleSubmit = async (values: CreateTaskInput) => {
     try {
-      //console.log("Form submitted:", values);
       await createTask(values);
       methods.reset();
       onClose();

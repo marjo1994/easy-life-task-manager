@@ -48,9 +48,7 @@ export const ListBoxField = ({
               className="mr-2 h-6 w-6 rounded-full object-cover"
             />
           )}
-
-          {/* Mostrar icono solo cuando NO hay selección y hay icono */}
-          {!isOptionSelected && icon && (
+          {!selectedOption.avatar && icon && (
             <img src={icon} alt={`${name} icon`} className="mr-2" />
           )}
 
