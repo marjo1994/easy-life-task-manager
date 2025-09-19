@@ -3,6 +3,8 @@ import { useSearchStore } from "../store/searchStore";
 import { parseSearchInput } from "../utils/parseSearchInput";
 import { useDebounce } from "../utils/useDebounce";
 import { useUsers } from "./useUsers";
+import { startOfDay, endOfDay } from "date-fns";
+
 import type {
   FilterTaskInput,
   PointEstimate,
@@ -62,7 +64,7 @@ export const useSearchFiltes = () => {
       }
     }
 
-    //console.log("Back Filters:", backendFilters);
+    console.log("Back Filters:", backendFilters);
     //console.log("Front Filters:", frontendFilters);
 
     /*return {

@@ -10,6 +10,7 @@ import { TaskTagOptions } from "../../utils/taskTagOptions";
 import { PointEstimateOptions } from "../../utils/pointEstimateOptions";
 import { DatePickerField } from "../molecules/DatePickerField";
 import { useCreateTask } from "../../hooks/useCreateTask";
+import closeBtn from "../../assets/close-btn.svg";
 import {
   Status,
   TaskTag,
@@ -76,7 +77,7 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
             className="mr-6 bg-transparent p-2 font-normal text-neutral-100"
             onClick={handleCancel}
           >
-            x
+            <img src={closeBtn} alt="close btn" />
           </button>
           <button
             type="submit"

@@ -80,7 +80,7 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
             className="mr-6 bg-transparent p-2 font-normal text-neutral-100"
             onClick={handleCancel}
           >
-            {closeBtn}
+            <img src={closeBtn} alt="close btn" />
           </button>
           <button
             type="submit"
