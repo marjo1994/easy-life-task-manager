@@ -39,7 +39,7 @@ export const ListBoxField = ({
     <>
       <Listbox value={value} onChange={(val) => setValue(name, val)}>
         <ListboxButton
-          className={`text-body- flex flex-row items-center rounded-sm ${isOptionSelected ? "bg-transparent p-0" : "bg-neutral-100/10 px-4 py-1"}`}
+          className={`text-body- flex flex-row items-center rounded-sm px-4 py-1 ${isOptionSelected ? "bg-transparent" : "bg-neutral-100/10"}`}
         >
           {isOptionSelected && selectedOption.avatar && (
             <img
@@ -57,7 +57,7 @@ export const ListBoxField = ({
         {!disabled && (
           <ListboxOptions
             anchor="bottom start"
-            className="z-50 mt-2 rounded-lg border border-neutral-100 bg-neutral-200 py-2"
+            className="z-51 mt-2 rounded-lg border border-neutral-100 bg-neutral-200 py-2"
           >
             {options.map((option, idx) => (
               <ListboxOption

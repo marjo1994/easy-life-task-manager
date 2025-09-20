@@ -64,7 +64,7 @@ export const MultiListBoxField = ({
         </ListboxButton>
         <ListboxOptions
           anchor="bottom start"
-          className="z-50 mt-2 rounded-lg border border-neutral-100 bg-neutral-200 py-2"
+          className="z-51 mt-2 rounded-lg border border-neutral-100 bg-neutral-200 py-2"
         >
           {options.map((opt) => (
             <ListboxOption
@@ -73,13 +73,20 @@ export const MultiListBoxField = ({
               as="div"
               className="text-body-m flex cursor-pointer items-center px-4 py-2 text-neutral-50"
             >
-              <input
-                type="checkbox"
-                checked={values.includes(opt.value)}
-                onClick={() => toggleValue(opt.value)}
-                readOnly
-                className="mr-2"
-              />
+              <div className="relative mr-3 flex h-5 w-5 shrink-0 items-center justify-center">
+                <input
+                  type="checkbox"
+                  checked={values.includes(opt.value)}
+                  onClick={() => toggleValue(opt.value)}
+                  readOnly
+                  className="absolute h-5 w-5 cursor-pointer appearance-none rounded border-2 border-neutral-50"
+                />
+                {values.includes(opt.value) && (
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                    <div className="-mt-1 h-3 w-2 origin-center rotate-45 transform border-r-2 border-b-2 border-neutral-50"></div>
+                  </div>
+                )}
+              </div>
               {opt.label}
             </ListboxOption>
           ))}

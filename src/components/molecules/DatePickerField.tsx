@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../../date-picker-styles.css";
 import { format, parseISO, isValid } from "date-fns";
 
 type DatePickerFieldProps = {
@@ -54,14 +55,14 @@ export const DatePickerField = ({
   };
 
   return (
-    <div className="flex flex-row items-center rounded-sm bg-neutral-100/10 px-4 py-1">
+    <div className="flex flex-row items-center rounded-sm bg-neutral-100/10 px-4 py-1 text-neutral-50">
       {icon && <img src={icon} alt="Date icon" className="mr-2" />}
 
       <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}
         placeholderText={placeholder}
-        className="w-full bg-transparent text-neutral-50 focus:outline-none"
+        className="w-full bg-transparent text-white focus:outline-none"
         dateFormat="MMM d, yyyy"
         isClearable
       />

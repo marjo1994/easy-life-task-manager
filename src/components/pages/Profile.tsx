@@ -10,7 +10,7 @@ export const Profile = () => {
 
   return (
     <div className="flex h-full justify-center p-4 lg:items-center">
-      <div className="w-full max-w-md rounded-2xl bg-neutral-300 p-8 shadow-lg">
+      <div className="w-full max-w-md rounded-2xl bg-neutral-300 px-8 py-4 shadow-lg">
         <div className="bg-primary-300 mb-3 px-6 py-2">
           <h2 className="text-body-xl text-center font-bold text-neutral-50">
             Profile

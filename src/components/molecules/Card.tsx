@@ -45,7 +45,7 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
             <MenuItem
               as="button"
               onClick={handleEdit}
-              className="mb-2 flex w-full flex-row items-center px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100"
+              className="mb-2 flex w-full flex-row items-center rounded-lg px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100"
             >
               <img src={editIcon} alt="edit icon" className="mr-2.5 h-5 w-5" />
               Edit
@@ -54,7 +54,7 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
             <MenuItem
               as="button"
               onClick={handleDelete}
-              className="flex w-full flex-row items-center px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100"
+              className="flex w-full flex-row items-center rounded-lg px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100"
             >
               <img
                 src={deleteIcon}
