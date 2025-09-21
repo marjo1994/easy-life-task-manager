@@ -11,6 +11,8 @@ import { Modal } from "../molecules/Modal";
 import { AddTaskForm } from "../organisms/AddTaskForm";
 import { LoadingState } from "../molecules/Loading";
 import { useState } from "react";
+import { useQuery } from "@apollo/client/react";
+import { GET_USERS } from "../../graphql/queries/getUsers";
 
 /*const normalize = (str: string) => {
   return str.replace(/\s+/g, "").toLowerCase();
@@ -20,6 +22,7 @@ export const Dashboard: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const backendFilters = useSearchFiltes();
   const { tasks, loading, error } = useTasks(backendFilters);
+  useQuery(GET_USERS, { fetchPolicy: "cache-and-network" });
 
   /*console.log("Backend filters:", backendFilters);
   console.log("Frontend filters:", frontendFilters);

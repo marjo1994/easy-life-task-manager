@@ -4,12 +4,13 @@ import assigneeicon from "../../assets/assignee-icon.svg";
 
 export const UserSelector = () => {
   const { usersOptions, loading, error } = useUsers();
+  const showLoading = loading && usersOptions.length === 0;
 
   if (error) {
     <div className="text-primary-300 text-body-s">Error Loading</div>;
   }
 
-  if (loading) {
+  if (showLoading) {
     return (
       <ListBoxField
         name="assigneeId"

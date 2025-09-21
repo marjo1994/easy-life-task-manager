@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import estimateicon from "../../assets/control-estimate-icon.svg";
@@ -35,6 +36,7 @@ type EditTaskFormProps = {
 };
 
 export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
+  const [successMessage, setSuccessMessage] = useState("");
   const { updateTask, loading, error } = useUpdateTask();
 
   const methods = useForm({
@@ -59,7 +61,11 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
         ...formValues,
       });
       methods.reset();
-      onClose();
+      setSuccessMessage("¡Tarea actualizada exitosamente!");
+
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (e) {
       console.error(e);
     }
@@ -74,6 +80,11 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
         {error && <p className="text-primary-200 mt-2">{error.message}</p>}
+        {successMessage && (
+          <div className="bg-secondary-300 mb-4 rounded p-3 text-neutral-50">
+            {successMessage}
+          </div>
+        )}
         <div className="mb-6 flex justify-between lg:hidden">
           <button
             type="button"

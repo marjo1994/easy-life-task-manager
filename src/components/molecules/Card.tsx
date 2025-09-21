@@ -2,6 +2,7 @@ import type { GetTasksQuery } from "../../__generated__/graphql";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { formatDate } from "../../utils/utils";
 import { pointEstimateToNumber } from "../../utils/pointEstimateToNumber";
+import { getAvatar } from "../../utils/getAvatar";
 import { tagColors } from "../../utils/tagColors";
 import fileIcon from "../../assets/file-icon.svg";
 import commentIcon from "../../assets/comment-icon.svg";
@@ -18,7 +19,10 @@ type CardProps = {
   onEditClick: () => void;
   onDeleteClick: () => void;
 };
+
 export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
+  const assigneeAvatar = task.assignee?.id ? getAvatar(task.assignee.id) : null;
+
   const handleEdit = (e: React.MouseEvent) => {
     e.preventDefault();
     onEditClick();
@@ -92,7 +96,15 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
           })}
       </div>
       <div className="mb-2 flex justify-between">
-        <img className="h-8 w-8" src={avatar} alt="profile"></img>
+        {assigneeAvatar ? (
+          <img
+            className="h-8 w-8 rounded-full"
+            src={assigneeAvatar}
+            alt={`${task.assignee?.fullName} profile`}
+          />
+        ) : (
+          <img className="full h-8 w-8 rounded" src={avatar} alt="profile" />
+        )}
         <div className="flex flex-row items-center">
           <img src={fileIcon} alt="file" className="mr-4"></img>
           <span className="text-body-m mr-1">5</span>

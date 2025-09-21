@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import estimateicon from "../../assets/control-estimate-icon.svg";
@@ -35,6 +36,9 @@ type AddTaskFormProps = {
 };
 
 export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
+  const [successMessage, setSuccessMessage] = useState("");
+  const { createTask, loading, error } = useCreateTask();
+
   const methods = useForm({
     mode: "onChange",
     resolver: zodResolver(taskSchema),
@@ -48,15 +52,18 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     },
   });
 
-  const { createTask, loading, error } = useCreateTask();
-
   const handleSubmit = async (values: CreateTaskInput) => {
     try {
       await createTask(values);
       methods.reset();
-      onClose();
+      setSuccessMessage("¡Tarea creada exitosamente!");
+
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (e) {
       console.error(e);
+      setSuccessMessage("");
     }
   };
 
@@ -71,6 +78,11 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
         {error && <p className="text-primary-200 mt-2">{error.message}</p>}
+        {successMessage && (
+          <div className="bg-secondary-300 mb-4 rounded p-3 text-neutral-50">
+            {successMessage}
+          </div>
+        )}
         <div className="mb-6 flex justify-between lg:hidden">
           <button
             type="button"
