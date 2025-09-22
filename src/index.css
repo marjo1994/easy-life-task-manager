@@ -44,6 +44,22 @@
   @apply filter-custom-red;
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+  filter: invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%);
+}
+
+input[type="search"]::-webkit-search-cancel-button:hover {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%);
+}
+
+input[type="search"]::-moz-search-cancel-button {
+  filter: invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%);
+}
+
+input[type="search"]::-ms-clear {
+  color: var(--color-neutral-50);
+}
+
 @utility text-heading-xl {
   font-size: 4rem;
   line-height: 5.5rem;

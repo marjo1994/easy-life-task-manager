@@ -8,10 +8,25 @@ export const useTasks = (filters: FilterTaskInput = {}) => {
     fetchPolicy: "cache-and-network",
   });
 
+  const getFriendlyErrorMessage = (apolloError: any): string | null => {
+    if (!apolloError) return null;
+
+    const errorMessage = apolloError.message || "";
+
+    if (
+      errorMessage.includes("Response not successful: Received status code 400")
+    ) {
+      return "Invalid search parameters. Please check your filters and try again.";
+    }
+
+    return apolloError.message;
+  };
+
   return {
     tasks: data?.tasks ?? [],
     loading,
     error,
+    errorMessage: error ? getFriendlyErrorMessage(error) : null,
     refetch,
   };
 };

@@ -11,7 +11,7 @@ type LayoutProps = {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="flex h-screen bg-neutral-400 px-0 pt-2 lg:px-6 lg:pt-6">
+    <div className="flex h-screen bg-neutral-400 px-0 pt-2 lg:px-6 lg:pt-6 lg:pb-6">
       <Sidebar />
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         <div className="mx-4 shrink-0 lg:mx-0">

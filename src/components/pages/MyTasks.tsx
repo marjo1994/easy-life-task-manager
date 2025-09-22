@@ -24,11 +24,25 @@ export const MyTasks: React.FC = () => {
     assigneeId: "ca7af203-1674-4633-bf63-8372d07312cc",
   };
 
-  const { tasks, loading, error } = useTasks(filtersWithUserId);
+  const { tasks, loading, error, errorMessage } = useTasks(filtersWithUserId);
 
   if (loading) return <LoadingState />;
-  if (error) return <p>Error: {error.message}</p>;
-  if (!tasks) return <p>Not found data</p>;
+  if (error)
+    return (
+      <div className="text-primary-300 mx-4 mt-3 rounded-lg bg-neutral-50 p-4">
+        <p className="font-semibold">Something went wrong:</p>
+        <p>{errorMessage || error.message}</p>
+      </div>
+    );
+  if (tasks.length == 0)
+    return (
+      <div className="flex h-[70%] flex-col items-center justify-center text-neutral-50 lg:h-full">
+        <p className="text-heading-xs mb-3 font-semibold">No results found</p>
+        <p className="text-body-m font-normal">
+          No matches found, please try again.
+        </p>
+      </div>
+    );
 
   const tabs = [
     { id: 0, label: "Dashboard", icon: DashboardTab },

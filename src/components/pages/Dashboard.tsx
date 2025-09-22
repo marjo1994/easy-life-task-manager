@@ -14,41 +14,29 @@ import { useState } from "react";
 import { useQuery } from "@apollo/client/react";
 import { GET_USERS } from "../../graphql/queries/getUsers";
 
-/*const normalize = (str: string) => {
-  return str.replace(/\s+/g, "").toLowerCase();
-};*/
-
 export const Dashboard: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const backendFilters = useSearchFiltes();
-  const { tasks, loading, error } = useTasks(backendFilters);
+  const { tasks, loading, error, errorMessage } = useTasks(backendFilters);
   useQuery(GET_USERS, { fetchPolicy: "cache-and-network" });
 
-  /*console.log("Backend filters:", backendFilters);
-  console.log("Frontend filters:", frontendFilters);
-  console.log("Tasks from backend:", tasks);
-
-  const filteredTasks = useMemo(() => {
-    if (!tasks) return [];
-
-    if (!frontendFilters.searchText) {
-      return tasks;
-    }
-
-    console.log("Filtering with search text:", frontendFilters.searchText);
-
-    const normalizedSearch = normalize(frontendFilters.searchText);
-    console.log("normalizeSearch", normalizedSearch);
-    return tasks.filter(
-      (task) => task.name && normalize(task.name).includes(normalizedSearch)
-    );
-  }, [tasks, frontendFilters.searchText]);
-
-  console.log(filteredTasks, "filteredTasks");*/
-
   if (loading) return <LoadingState />;
-  if (error) return <p>Error: {error.message}</p>;
-  if (!tasks) return <p>Not found data</p>;
+  if (error)
+    return (
+      <div className="text-primary-300 mx-4 mt-3 rounded-lg bg-neutral-50 p-4">
+        <p className="font-semibold">Something went wrong:</p>
+        <p>{errorMessage || error.message}</p>
+      </div>
+    );
+  if (tasks.length == 0)
+    return (
+      <div className="flex h-[70%] flex-col items-center justify-center text-neutral-50 lg:h-full">
+        <p className="text-heading-xs mb-3 font-semibold">No results found</p>
+        <p className="text-body-m font-normal">
+          No matches found, please try again.
+        </p>
+      </div>
+    );
 
   const tabs = [
     { id: 0, label: "Dashboard", icon: DashboardTab },
@@ -106,11 +94,11 @@ export const Dashboard: React.FC = () => {
         </TabList>
 
         <TabPanels className="mt-6 ml-4 lg:mt-4 lg:ml-0">
-          <TabPanel className="h-[calc(100vh-195px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
+          <TabPanel className="h-[calc(100vh-210px)] flex-1 overflow-x-auto pb-24 sm:h-[calc(100vh-195px)] lg:pb-0">
             <KanbanView tasks={tasks} />
           </TabPanel>
 
-          <TabPanel className="h-[calc(100vh-195px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
+          <TabPanel className="flex-1 overflow-x-auto pb-24 sm:h-[calc(100vh-210px)] lg:pb-0">
             <TaskListView tasks={tasks} />
           </TabPanel>
         </TabPanels>

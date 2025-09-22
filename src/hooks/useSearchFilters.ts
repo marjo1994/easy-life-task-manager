@@ -3,8 +3,6 @@ import { useSearchStore } from "../store/searchStore";
 import { parseSearchInput } from "../utils/parseSearchInput";
 import { useDebounce } from "../utils/useDebounce";
 import { useUsers } from "./useUsers";
-import { startOfDay, endOfDay } from "date-fns";
-
 import type {
   FilterTaskInput,
   PointEstimate,
@@ -20,13 +18,6 @@ export const useSearchFiltes = () => {
   return useMemo(() => {
     const parsed = parseSearchInput(debouncedSearch);
     const backendFilters: FilterTaskInput = {};
-
-    //console.log("Parsed input:", parsed);
-
-    /*const frontendFilters = {
-      searchText: parsed.name,
-      hasNameSearch: !!parsed.name,
-    };*/
 
     if (parsed.name) {
       backendFilters.name = parsed.name;
@@ -63,14 +54,6 @@ export const useSearchFiltes = () => {
         backendFilters.dueDate = date.toISOString();
       }
     }
-
-    console.log("Back Filters:", backendFilters);
-    //console.log("Front Filters:", frontendFilters);
-
-    /*return {
-      backendFilters: backendFilters,
-      frontendFilters,
-    };*/
 
     return backendFilters;
   }, [debouncedSearch, users]);

@@ -1,8 +1,8 @@
 export const ErrorFallback = ({ error }: any) => {
   return (
-    <div role="alert" className="w-full rounded-lg bg-red-100 p-4 text-red-700">
-      <p>Something went wrong:</p>
-      <pre>{error.message}</pre>
+    <div className="text-primary-300 mx-4 mt-3 rounded-lg bg-neutral-50 p-4">
+      <p className="font-semibold">Something went wrong:</p>
+      <p>{error.message}</p>
     </div>
   );
 };
