@@ -13,7 +13,6 @@ import { ColumnContainer } from "../molecules/ColumnContainer";
 import { useDeleteTask } from "../../hooks/useDeleteTask";
 import { useUpdateTask } from "../../hooks/useEditTask";
 import {
-  closestCorners,
   DndContext,
   DragOverlay,
   PointerSensor,
