@@ -78,3 +78,11 @@ yarn
 ## Live DEMO
 
 https://easy-life-task-manager.vercel.app/
+
+# Feature: Drag and Drop
+
+![Drag and Drop Demo](public/assets/anim-1.gif)
+
+# Feature: Filter
+
+![Filter Demo](public/assets/anim-2.gif)
