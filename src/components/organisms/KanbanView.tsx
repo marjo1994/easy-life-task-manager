@@ -17,6 +17,8 @@ import {
   DndContext,
   DragOverlay,
   PointerSensor,
+  rectIntersection,
+  TouchSensor,
   useSensor,
   useSensors,
   type DragEndEvent,
@@ -67,19 +69,6 @@ export const KanbanView = ({ tasks, refetch }: KanbanProps) => {
     }
   };
 
-  /*const generateUniquePosition = (
-    activeTask: Task,
-    overTask: Task,
-    allTasks: Task[]
-  ): number => {
-    const columnTasks = allTasks
-      .filter((t) => t.status === activeTask.status && t.id != activeTask.id)
-      .sort((a, b) => (a.position || 0) - (b.position || 0));
-    const overIndex = columnTasks.findIndex((t) => t.id === overTask.id);
-
-    return overIndex + 1;
-  };*/
-
   const ALL_STATUSES = Object.keys(STATUS_LABELS) as Status[];
 
   const completeGroupedTasks = ALL_STATUSES.reduce(
@@ -96,6 +85,9 @@ export const KanbanView = ({ tasks, refetch }: KanbanProps) => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: { distance: 8 },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: { distance: 5 },
     })
   );
 
@@ -163,7 +155,7 @@ export const KanbanView = ({ tasks, refetch }: KanbanProps) => {
   return (
     <DndContext
       sensors={sensors}
-      collisionDetection={closestCorners}
+      collisionDetection={rectIntersection}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
