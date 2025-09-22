@@ -24,7 +24,8 @@ export const MyTasks: React.FC = () => {
     assigneeId: "ca7af203-1674-4633-bf63-8372d07312cc",
   };
 
-  const { tasks, loading, error, errorMessage } = useTasks(filtersWithUserId);
+  const { tasks, loading, error, errorMessage, refetch } =
+    useTasks(filtersWithUserId);
 
   if (loading) return <LoadingState />;
   if (error)
@@ -101,7 +102,7 @@ export const MyTasks: React.FC = () => {
 
         <TabPanels className="mt-6 ml-4 lg:mt-4 lg:ml-0">
           <TabPanel className="h-[calc(100vh-215px)] flex-1 overflow-x-auto pb-24 sm:h-[calc(100vh-200px)] lg:pb-0">
-            <KanbanView tasks={tasks} />
+            <KanbanView tasks={tasks} refetch={refetch} />
           </TabPanel>
 
           <TabPanel className="h-[calc(100vh-200px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
