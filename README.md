@@ -81,8 +81,8 @@ https://easy-life-task-manager.vercel.app/
 
 # Feature: Drag and Drop
 
-![Drag and Drop Demo](public/assets/anim-1.gif)
+![Drag and Drop Demo](public/anim-1.gif)
 
 # Feature: Filter
 
-![Filter Demo](public/assets/anim-2.gif)
+![Filter Demo](public/anim-2.gif)
