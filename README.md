@@ -83,6 +83,10 @@ https://easy-life-task-manager.vercel.app/
 
 ![Drag and Drop Demo](public/anim-1.gif)
 
-# Feature: Filter
+# Feature: Filter & Add Task
 
 ![Filter Demo](public/anim-2.gif)
+
+# Feature: Edit Task & Delete Task
+
+![Edit and delete task Demo](public/anim-2.gif)
