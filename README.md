@@ -53,7 +53,7 @@ yarn
 
 ## Features
 
-- Dashboard with Sidebar, Header, and task columns.
+- Dashboard with Sidebar, Search, and task columns.
 - Task cards with name, tags, due date, points, and avatar.
 - Create, edit, and delete tasks.
 - Loading, error, and empty states.
@@ -89,4 +89,4 @@ https://easy-life-task-manager.vercel.app/
 
 # Feature: Edit Task & Delete Task
 
-![Edit and delete task Demo](public/anim-2.gif)
+![Edit and delete task Demo](public/anim-3.gif)
