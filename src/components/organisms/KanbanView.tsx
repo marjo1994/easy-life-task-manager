@@ -6,7 +6,7 @@ import type {
 import { STATUS_LABELS } from "../../utils/statusLabels";
 import { useState } from "react";
 import { Modal } from "../molecules/Modal";
-import { Card } from "../molecules/Card";
+import { Card } from "../atoms/Card";
 import { EditTaskForm } from "./EditTaskForm";
 import { DeleteModal } from "../molecules/DeleteModal";
 import { ColumnContainer } from "../molecules/ColumnContainer";

@@ -10,14 +10,14 @@ export const normalizeDate = (date: Date): Date => {
 
 const MS_IN_DAY = 24 * 60 * 60 * 1000;
 
-export const formatDate = (isoString: string): string => {
-  if (!isoString) return "No date";
+export const formatDate = (isoString: string): Record<string, string> => {
+  if (!isoString) return { text: "No date", color: "text-gray-400" };
 
   const dateOnly = isoString.split("T")[0];
   const date = parseISO(dateOnly);
 
   if (!isValid(date)) {
-    return "Invalid date";
+    return { text: "Invalid date", color: "text-gray-400" };
   }
 
   const today = new Date();
@@ -27,12 +27,16 @@ export const formatDate = (isoString: string): string => {
   const diffTime = targetNormalized.getTime() - todayNormalized.getTime();
   const diffDays = Math.round(diffTime / MS_IN_DAY);
 
-  if (diffDays === 0) return "TODAY";
-  if (diffDays === -1) return "YESTERDAY";
+  let color = "text-green-500 filter-green";
+  if (diffDays < 0) color = "text-red-400 filter-custom-red";
+  else if (diffDays < 2) color = "text-yellow-500 filter-yellow";
+
+  if (diffDays === 0) return { text: "TODAY", color };
+  if (diffDays === -1) return { text: "YESTERDAY", color };
 
   const day = format(date, "dd");
   const month = format(date, "MMMM").toUpperCase();
   const year = format(date, "yyyy");
 
-  return `${day} ${month}, ${year}`;
+  return { text: `${day} ${month}, ${year}`, color };
 };

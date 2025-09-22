@@ -28,6 +28,7 @@ export const Card = ({
   isDragging = false,
 }: CardProps) => {
   const assigneeAvatar = task.assignee?.id ? getAvatar(task.assignee.id) : null;
+  const { text, color } = formatDate(task.dueDate);
 
   const handleEdit = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -88,9 +89,11 @@ export const Card = ({
           <span className="flex xl:hidden">Pts</span>
           <span className="hidden xl:flex">Points</span>
         </span>
-        <div className="text-body-s-mobile xl:text-body-m flex flex-row items-center rounded-sm bg-neutral-100/10 px-4 py-1 font-normal text-neutral-50 xl:font-semibold">
-          <img className="mr-2.5" src={alarmIcon} alt="alarm icon" />
-          {formatDate(task.dueDate)}
+        <div
+          className={`text-body-s-mobile xl:text-body-m flex flex-row items-center rounded-sm bg-neutral-100/10 px-4 py-1 font-normal text-neutral-50 xl:font-semibold ${color}`}
+        >
+          <img className={`mr-2.5 ${color}`} src={alarmIcon} alt="alarm icon" />
+          {text}
         </div>
       </div>
       <div className="mb-4 flex gap-2">

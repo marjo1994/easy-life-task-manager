@@ -45,6 +45,16 @@
     hue-rotate(175deg) brightness(100%) contrast(91%);
 }
 
+@utility filter-green {
+  filter: brightness(0) saturate(100%) invert(41%) sepia(94%) saturate(313%)
+    hue-rotate(75deg) brightness(97%) contrast(93%);
+}
+
+@utility filter-yellow {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(87%) saturate(639%)
+    hue-rotate(1deg) brightness(103%) contrast(102%);
+}
+
 .option-icon:hover {
   img {
     @apply filter-custom-gray;

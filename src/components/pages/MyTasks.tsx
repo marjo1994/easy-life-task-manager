@@ -9,7 +9,7 @@ import { classNames } from "../../utils/utils";
 import plusBtn from "../../assets/plus-btn.svg";
 import { Modal } from "../molecules/Modal";
 import { AddTaskForm } from "../organisms/AddTaskForm";
-import { LoadingState } from "../molecules/Loading";
+import { LoadingState } from "../atoms/Loading";
 import { useState } from "react";
 import { useQuery } from "@apollo/client/react";
 import { GET_USERS } from "../../graphql/queries/getUsers";

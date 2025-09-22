@@ -1,5 +1,5 @@
 import { useProfile } from "../../hooks/useProfile";
-import { LoadingState } from "../molecules/Loading";
+import { LoadingState } from "../atoms/Loading";
 
 export const Profile = () => {
   const { profile, loading, error } = useProfile();

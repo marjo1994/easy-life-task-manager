@@ -1,6 +1,6 @@
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { Card } from "./Card";
+import { Card } from "../atoms/Card";
 import type { GetTasksQuery } from "../../__generated__/graphql";
 
 type Task = GetTasksQuery["tasks"][number];
