@@ -94,11 +94,11 @@ export const Dashboard: React.FC = () => {
         </TabList>
 
         <TabPanels className="mt-6 ml-4 lg:mt-4 lg:ml-0">
-          <TabPanel className="h-[calc(100vh-210px)] flex-1 overflow-x-auto pb-24 sm:h-[calc(100vh-195px)] lg:pb-0">
+          <TabPanel className="h-[calc(100vh-220px)] flex-1 overflow-x-auto pb-24 sm:h-[calc(100vh-190px)] lg:pb-0">
             <KanbanView tasks={tasks} />
           </TabPanel>
 
-          <TabPanel className="flex-1 overflow-x-auto pb-24 sm:h-[calc(100vh-210px)] lg:pb-0">
+          <TabPanel className="h-[calc(100vh-190px)] flex-1 overflow-x-auto pb-24 lg:pb-0">
             <TaskListView tasks={tasks} />
           </TabPanel>
         </TabPanels>

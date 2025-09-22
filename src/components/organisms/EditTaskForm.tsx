@@ -13,7 +13,7 @@ import { DatePickerField } from "../molecules/DatePickerField";
 import closeBtn from "../../assets/close-btn.svg";
 import {
   TaskTag,
-  type Task,
+  type GetTasksQuery,
   type UpdateTaskInput,
 } from "../../__generated__/graphql";
 import { taskSchema } from "../../schemas/taskSchema";
@@ -29,6 +29,8 @@ const ErrorMessage = ({ name }: { name: string }) => {
     </p>
   ) : null;
 };
+
+type Task = GetTasksQuery["tasks"][number];
 
 type EditTaskFormProps = {
   task: Task;

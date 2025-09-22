@@ -3,5 +3,5 @@ export const STATUS_LABELS: Record<string, string> = {
   TODO: "To Do",
   IN_PROGRESS: "In progress",
   CANCELLED: "Cancelled",
-  DONE: "Completed",
+  DONE: "Done",
 };
