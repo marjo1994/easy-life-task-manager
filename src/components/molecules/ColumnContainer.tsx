@@ -50,7 +50,7 @@ export const ColumnContainer = ({
 
         {isOver && tasks.length === 0 && (
           <div className="mt-4 flex h-20 items-center justify-center">
-            <span className="text-sm text-neutral-100">Soltar aquí</span>
+            <span className="text-sm text-neutral-100">Drop here</span>
           </div>
         )}
       </div>

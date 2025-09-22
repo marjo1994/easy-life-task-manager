@@ -18,9 +18,15 @@ type CardProps = {
   task: Task;
   onEditClick: () => void;
   onDeleteClick: () => void;
+  isDragging?: boolean;
 };
 
-export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
+export const Card = ({
+  task,
+  onEditClick,
+  onDeleteClick,
+  isDragging = false,
+}: CardProps) => {
   const assigneeAvatar = task.assignee?.id ? getAvatar(task.assignee.id) : null;
 
   const handleEdit = (e: React.MouseEvent) => {
@@ -33,7 +39,13 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
     onDeleteClick();
   };
   return (
-    <div className="rounded-xl bg-neutral-300 p-3 text-neutral-50">
+    <div
+      className={`rounded-xl bg-neutral-300 p-3 text-neutral-50 ${
+        isDragging
+          ? "border-2 border-neutral-400/30 shadow-xl"
+          : "shadow-sm hover:shadow-md"
+      }`}
+    >
       <div className="mb-3 flex justify-between">
         <span className="text-headline-s-mobile xl:text-body-l font-normal xl:font-semibold">
           {task.name}
@@ -49,7 +61,7 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
             <MenuItem
               as="button"
               onClick={handleEdit}
-              className="mb-2 flex w-full flex-row items-center rounded-lg px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100"
+              className="option-icon mb-2 flex w-full flex-row items-center rounded-lg px-4 py-2 text-left text-neutral-50 hover:bg-neutral-100 hover:text-neutral-300 focus-visible:ring"
             >
               <img src={editIcon} alt="edit icon" className="mr-2.5 h-5 w-5" />
               Edit
@@ -58,12 +70,12 @@ export const Card = ({ task, onEditClick, onDeleteClick }: CardProps) => {
             <MenuItem
               as="button"
               onClick={handleDelete}
-              className="flex w-full flex-row items-center rounded-lg px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100"
+              className="option-icon flex w-full flex-row items-center rounded-lg px-4 py-1.5 text-left text-neutral-50 hover:bg-neutral-100 hover:text-neutral-300 focus-visible:ring"
             >
               <img
                 src={deleteIcon}
                 alt="delete icon"
-                className="mr-2.5 h-5 w-5"
+                className="option-icon mr-2.5 h-5 w-5"
               />
               Delete
             </MenuItem>

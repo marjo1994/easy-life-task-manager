@@ -9,6 +9,7 @@ export const GET_TASKS = gql(`
       dueDate
       status
       tags
+      position
       assignee {
         id
         fullName

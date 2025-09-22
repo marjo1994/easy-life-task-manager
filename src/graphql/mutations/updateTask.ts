@@ -13,5 +13,6 @@ mutation UpdateTask($input: UpdateTaskInput!) {
       id
       fullName
     }
+    position
   }
 }`);

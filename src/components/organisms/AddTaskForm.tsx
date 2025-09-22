@@ -56,7 +56,7 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     try {
       await createTask(values);
       methods.reset();
-      setSuccessMessage("¡Tarea creada exitosamente!");
+      setSuccessMessage("¡Task created successfully!");
 
       setTimeout(() => {
         onClose();

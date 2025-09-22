@@ -13,6 +13,7 @@ mutation CreateTask($input: CreateTaskInput!) {
       fullName
     }
     dueDate
+    position
   }
 }
 `);

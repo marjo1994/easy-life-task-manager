@@ -63,7 +63,7 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
         ...formValues,
       });
       methods.reset();
-      setSuccessMessage("¡Tarea actualizada exitosamente!");
+      setSuccessMessage("¡Task updated successfully!");
 
       setTimeout(() => {
         onClose();

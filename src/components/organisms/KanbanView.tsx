@@ -23,7 +23,11 @@ import {
   type DragStartEvent,
 } from "@dnd-kit/core";
 
-export const KanbanView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
+type KanbanProps = {
+  tasks: GetTasksQuery["tasks"];
+  refetch: () => void;
+};
+export const KanbanView = ({ tasks, refetch }: KanbanProps) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
@@ -63,11 +67,27 @@ export const KanbanView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
     }
   };
 
+  /*const generateUniquePosition = (
+    activeTask: Task,
+    overTask: Task,
+    allTasks: Task[]
+  ): number => {
+    const columnTasks = allTasks
+      .filter((t) => t.status === activeTask.status && t.id != activeTask.id)
+      .sort((a, b) => (a.position || 0) - (b.position || 0));
+    const overIndex = columnTasks.findIndex((t) => t.id === overTask.id);
+
+    return overIndex + 1;
+  };*/
+
   const ALL_STATUSES = Object.keys(STATUS_LABELS) as Status[];
 
   const completeGroupedTasks = ALL_STATUSES.reduce(
     (acc, status) => {
-      acc[status] = tasks.filter((task) => task.status === status);
+      const columnTasks = tasks
+        .filter((task) => task.status === status)
+        .sort((a, b) => (a.position || 0) - (b.position || 0));
+      acc[status] = columnTasks;
       return acc;
     },
     {} as Record<string, Task[]>
@@ -91,30 +111,50 @@ export const KanbanView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
-
     if (!over) {
       setActiveTask(null);
       return;
     }
-
     const activeTask = tasks.find((t) => t.id === active.id);
     if (!activeTask) return;
 
-    const overContainer = over.id.toString();
+    const overId = over.id.toString();
 
-    if (activeTask && activeTask.status !== overContainer) {
-      try {
+    try {
+      const isOverStatusColumn = overId in STATUS_LABELS;
+      const isOverTask = tasks.some((t) => t.id === overId);
+
+      if (isOverStatusColumn && activeTask.status !== overId) {
         const updateData: UpdateTaskInput = {
           id: activeTask.id,
-          status: overContainer as Status,
+          status: overId as Status,
         };
-
-        //console.log("Update data:", updateData);
-
         await updateTask(updateData);
-      } catch (error) {
-        console.error("Error updating task status:", error);
+      } else if (isOverTask) {
+        const overTask = tasks.find((t) => t.id === over.id);
+
+        if (overTask && overTask?.status !== activeTask.status) {
+          const updateData: UpdateTaskInput = {
+            id: activeTask.id,
+            status: overTask.status,
+          };
+          await updateTask(updateData);
+        } else {
+          const updateData: UpdateTaskInput = {
+            id: activeTask.id,
+            position: overTask?.position || 0,
+          };
+          await updateTask(updateData);
+
+          setTimeout(() => {
+            refetch();
+          }, 100);
+        }
+      } else {
+        console.log("No action needed");
       }
+    } catch (error) {
+      console.error("Error updating task:", error);
     }
 
     setActiveTask(null);
@@ -147,6 +187,7 @@ export const KanbanView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
               task={activeTask}
               onEditClick={() => {}}
               onDeleteClick={() => {}}
+              isDragging={true}
             />
           </div>
         )}

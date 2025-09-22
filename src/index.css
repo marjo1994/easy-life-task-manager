@@ -40,6 +40,17 @@
     hue-rotate(325deg) brightness(92%) contrast(84%);
 }
 
+@utility filter-custom-gray {
+  filter: brightness(0) saturate(100%) invert(15%) sepia(8%) saturate(599%)
+    hue-rotate(175deg) brightness(100%) contrast(91%);
+}
+
+.option-icon:hover {
+  img {
+    @apply filter-custom-gray;
+  }
+}
+
 .custom-nav-icon:hover {
   @apply filter-custom-red;
 }
