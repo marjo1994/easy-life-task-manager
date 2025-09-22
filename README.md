@@ -40,16 +40,16 @@ yarn
 
 ## Structure
 
-- Implement Atomic Design Pattern
-
-src/
+```src/
 ├── components/ # UI components : Atomic Design Pattern (Atoms, Molecules, Organisms/ Pages)
+├── _generated_/ # Generated types by Codegen
 ├── graphql/ # Queries & mutations
 ├── hooks/ # Custom React hooks
 ├── schemas/ # Zod validation
 ├── store/ # Using Zustand, searchStore.ts
 ├── utils/ # Utility functions, helpers, constants
 └── index.css/ # Global Styles: Colors, typography, etc.
+```
 
 ## Features
 
