@@ -45,6 +45,8 @@ export const Section = ({ title, tasks }: SectionProps) => {
                 const { bg, text, indicatorBg } = firstTag
                   ? tagColors[firstTag]
                   : {};
+                const { text: dateText } = formatDate(task.dueDate);
+
                 return (
                   <div
                     key={task.id}
@@ -98,7 +100,7 @@ export const Section = ({ title, tasks }: SectionProps) => {
                       {task.assignee?.fullName}
                     </span>
                     <span className="text-subheadline-m-mobile xl:text-body-m flex flex-row items-center px-2 py-4 font-normal">
-                      {formatDate(task.dueDate)}
+                      {dateText}
                     </span>
                   </div>
                 );
