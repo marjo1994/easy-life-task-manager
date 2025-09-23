@@ -4,13 +4,13 @@ import type { GetTasksQuery } from "../../__generated__/graphql";
 
 type Task = GetTasksQuery["tasks"][number];
 
-interface ColumnContainerProps {
+type ColumnContainerProps = {
   id: string;
   title: string;
   tasks: Task[];
   onEditClick: (task: Task) => void;
   onDeleteClick: (task: Task) => void;
-}
+};
 
 export const ColumnContainer = ({
   id,

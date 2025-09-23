@@ -5,11 +5,11 @@ import type { GetTasksQuery } from "../../__generated__/graphql";
 
 type Task = GetTasksQuery["tasks"][number];
 
-interface DraggableCardProps {
+type DraggableCardProps = {
   task: Task;
   onEditClick: () => void;
   onDeleteClick: () => void;
-}
+};
 
 export const DraggableCard = ({
   task,
