@@ -41,6 +41,7 @@ export const Card = ({
   };
   return (
     <div
+      data-testid="task-card"
       className={`rounded-xl bg-neutral-300 p-3 text-neutral-50 ${
         isDragging
           ? "border-2 border-neutral-400/30 shadow-xl"
