@@ -35,9 +35,13 @@ export const ListBoxField = ({
   const selectedOption =
     options.find((opt) => opt.value === value) || options[0];
 
+  const handleChange = (value: Option) => {
+    setValue(name, value);
+  };
+
   return (
     <>
-      <Listbox value={value} onChange={(val) => setValue(name, val)}>
+      <Listbox value={value} onChange={handleChange}>
         <ListboxButton
           className={`text-body- flex flex-row items-center rounded-sm px-4 py-1 ${isOptionSelected ? "bg-transparent" : "bg-neutral-100/10"}`}
         >

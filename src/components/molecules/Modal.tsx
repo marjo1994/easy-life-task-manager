@@ -18,6 +18,8 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       <div
         className="relative h-full w-full rounded-lg bg-neutral-400 p-4 text-neutral-100 shadow-lg md:h-auto md:min-h-[184px] md:w-[653px] lg:bg-neutral-200"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
       >
         {children}
       </div>
