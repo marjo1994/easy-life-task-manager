@@ -15,10 +15,9 @@ import closeBtn from "../../assets/close-btn.svg";
 import {
   Status,
   TaskTag,
-  type CreateTaskInput,
   type PointEstimate,
 } from "../../__generated__/graphql";
-import { taskSchema } from "../../schemas/taskSchema";
+import { taskSchema, type TaskFormData } from "../../schemas/taskSchema";
 
 const ErrorMessage = ({ name }: { name: string }) => {
   const {
@@ -52,7 +51,7 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     },
   });
 
-  const handleSubmit = async (values: CreateTaskInput) => {
+  const handleSubmit = async (values: TaskFormData) => {
     try {
       await createTask(values);
       methods.reset();
@@ -71,8 +70,6 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     methods.reset();
     onClose();
   };
-
-  const isFormValid = taskSchema.safeParse(methods.watch()).success;
 
   return (
     <FormProvider {...methods}>
@@ -93,8 +90,9 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
           </button>
           <button
             type="submit"
-            className={`rounded-lg bg-transparent p-2 font-normal text-neutral-100 ${isFormValid ? "bg-primary-300" : "bg-primary-100 cursor-not-allowed"}`}
-            disabled={loading || !isFormValid}
+            className={`rounded-lg bg-transparent p-2 font-normal text-neutral-100 ${methods.formState.isDirty ? "bg-primary-300" : "bg-primary-100 cursor-not-allowed"}`}
+            disabled={loading || !methods.formState.isDirty}
+            data-testid="submit-task-button"
           >
             {loading ? "Creating" : "Create"}
           </button>
@@ -153,8 +151,9 @@ export const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
           </button>
           <button
             type="submit"
-            className={`rounded-lg p-2 font-normal text-neutral-50 ${isFormValid ? "bg-primary-300" : "bg-primary-100 cursor-not-allowed"}`}
-            disabled={loading || !isFormValid}
+            className={`rounded-lg p-2 font-normal text-neutral-50 ${methods.formState.isDirty ? "bg-primary-300" : "bg-primary-100 cursor-not-allowed"}`}
+            disabled={loading || !methods.formState.isDirty}
+            data-testid="submit-task-button"
           >
             {loading ? "Creating" : "Create"}
           </button>

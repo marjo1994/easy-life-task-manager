@@ -48,7 +48,7 @@ export const DatePickerField = ({
     if (date) {
       const dateOnly = formatToDateOnly(date);
       const isoDate = dateOnlyToISO(dateOnly);
-      setValue(name, isoDate);
+      setValue(name, isoDate, { shouldDirty: true });
     } else {
       setValue(name, null);
     }

@@ -11,12 +11,8 @@ import { TaskTagOptions } from "../../utils/taskTagOptions";
 import { PointEstimateOptions } from "../../utils/pointEstimateOptions";
 import { DatePickerField } from "../molecules/DatePickerField";
 import closeBtn from "../../assets/close-btn.svg";
-import {
-  TaskTag,
-  type GetTasksQuery,
-  type UpdateTaskInput,
-} from "../../__generated__/graphql";
-import { taskSchema } from "../../schemas/taskSchema";
+import { TaskTag, type GetTasksQuery } from "../../__generated__/graphql";
+import { taskSchema, type TaskFormData } from "../../schemas/taskSchema";
 import { useUpdateTask } from "../../hooks/useEditTask";
 
 const ErrorMessage = ({ name }: { name: string }) => {
@@ -54,9 +50,7 @@ export const EditTaskForm = ({ onClose, task }: EditTaskFormProps) => {
     },
   });
 
-  type TaskFormValues = Omit<UpdateTaskInput, "id">;
-
-  const handleSubmit = async (formValues: TaskFormValues) => {
+  const handleSubmit = async (formValues: TaskFormData) => {
     try {
       await updateTask({
         id: task.id,

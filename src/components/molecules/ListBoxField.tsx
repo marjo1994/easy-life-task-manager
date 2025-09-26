@@ -36,7 +36,7 @@ export const ListBoxField = ({
     options.find((opt) => opt.value === value) || options[0];
 
   const handleChange = (value: Option) => {
-    setValue(name, value);
+    setValue(name, value, { shouldDirty: true });
   };
 
   return (

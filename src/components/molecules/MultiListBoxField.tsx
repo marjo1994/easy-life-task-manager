@@ -29,10 +29,11 @@ export const MultiListBoxField = ({
     if (values.includes(val)) {
       setValue(
         name,
-        values.filter((v) => v !== val)
+        values.filter((v) => v !== val),
+        { shouldDirty: true }
       );
     } else {
-      setValue(name, [...values, val]);
+      setValue(name, [...values, val], { shouldDirty: true });
     }
   };
 

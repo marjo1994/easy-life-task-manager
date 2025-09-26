@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "format": "prettier --write.",
     "generate": "graphql-codegen",
-    "test": "vitest"
+    "test": "vitest",
+    "cy:open": "cypress open"
   },
   "dependencies": {
     "@apollo/client": "^4.0.4",
@@ -45,6 +46,7 @@
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.3",
     "autoprefixer": "^10.4.21",
+    "cypress": "^15.3.0",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^5.2.0",

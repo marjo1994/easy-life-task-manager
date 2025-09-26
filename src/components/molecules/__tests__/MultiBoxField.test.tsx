@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm } from "react-hook-form";
 import { MultiListBoxField } from "../MultiListBoxField";
 import { TaskTag } from "../../../__generated__/graphql";
@@ -68,10 +69,67 @@ describe("MultiListBoxField", () => {
 
     render(<TestComponent />);
 
-    screen.debug();
-
     expect(screen.getByText("Ios")).toBeInTheDocument();
     expect(screen.getByText("Rails")).toBeInTheDocument();
     expect(screen.queryByText("Label")).not.toBeInTheDocument();
+  });
+  it("toggles value when checkbox is clicked", async () => {
+    const user = userEvent.setup();
+
+    const TestComponent = () => {
+      const methods = useForm({ defaultValues: { tags: [TaskTag.Ios] } });
+      return (
+        <FormProvider {...methods}>
+          <div>
+            <MultiListBoxField {...defaultProps} />
+            <div data-testid="current-values">
+              {JSON.stringify(methods.watch("tags"))}
+            </div>
+          </div>
+        </FormProvider>
+      );
+    };
+
+    render(<TestComponent />);
+
+    expect(screen.getByTestId("current-values")).toHaveTextContent(
+      JSON.stringify([TaskTag.Ios])
+    );
+
+    const button = screen.getByRole("button");
+    await user.click(button);
+
+    const options = screen.getAllByRole("option");
+    const androidOption = options.find((opt) =>
+      opt.textContent?.includes("Android")
+    );
+    expect(androidOption).toBeDefined();
+
+    if (androidOption) {
+      const androidCheckbox = androidOption.querySelector(
+        'input[type="checkbox"]'
+      )!;
+      await user.click(androidCheckbox);
+    }
+
+    await waitFor(() => {
+      expect(screen.getByTestId("current-values")).toHaveTextContent(
+        JSON.stringify([TaskTag.Ios, TaskTag.Android])
+      );
+    });
+
+    const iosOption = options.find((opt) => opt.textContent?.includes("Ios"));
+    expect(iosOption).toBeDefined();
+
+    if (iosOption) {
+      const iosCheckbox = iosOption.querySelector('input[type="checkbox"]')!;
+      await user.click(iosCheckbox);
+    }
+
+    await waitFor(() => {
+      expect(screen.getByTestId("current-values")).toHaveTextContent(
+        JSON.stringify([TaskTag.Android])
+      );
+    });
   });
 });

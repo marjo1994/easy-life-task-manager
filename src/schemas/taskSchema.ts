@@ -3,12 +3,20 @@ import { PointEstimate, Status, TaskTag } from "../__generated__/graphql";
 import { parseISO } from "date-fns";
 import { normalizeDate } from "../utils/utils";
 
-const pointEstimateSchema = z.enum(PointEstimate);
 const taskTagSchema = z.enum(TaskTag);
 const statusSchema = z.enum(Status);
 
+const pointEstimateSchema = z.custom<PointEstimate>(
+  (value) => Object.values(PointEstimate).includes(value as PointEstimate),
+  { message: "Point estimate is required" }
+);
+
 export const taskSchema = z.object({
-  name: z.string().min(1, { message: "Task is empty" }),
+  name: z
+    .string()
+    .min(1, "Task is empty")
+    .min(3, "Min 3 characters")
+    .max(20, "Max 20 characters"),
   pointEstimate: pointEstimateSchema,
   assigneeId: z.string().min(1, { message: "Assignee is required" }),
   tags: z.array(taskTagSchema).min(1, { message: "Tags are required" }),
@@ -34,3 +42,5 @@ export const taskSchema = z.object({
   ),
   status: statusSchema,
 });
+
+export type TaskFormData = z.output<typeof taskSchema>;
