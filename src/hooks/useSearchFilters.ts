@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSearchStore } from "../store/searchStore";
 import { parseSearchInput } from "../utils/parseSearchInput";
-import { useDebounce } from "../utils/useDebounce";
+//import { useDebounce } from "../utils/useDebounce";
 import { useUsers } from "./useUsers";
 import type {
   FilterTaskInput,
@@ -11,12 +11,20 @@ import type {
 } from "../__generated__/graphql";
 
 export const useSearchFiltes = () => {
-  const { searchTerm } = useSearchStore();
-  const debouncedSearch = useDebounce(searchTerm, 600);
+  const { searchTerm, isSearchActive } = useSearchStore();
+  //const debouncedSearch = useDebounce(searchTerm, 600);
   const { users } = useUsers();
 
   return useMemo(() => {
-    const parsed = parseSearchInput(debouncedSearch);
+    if (!isSearchActive) {
+      return {};
+    }
+
+    if (!searchTerm.trim()) {
+      return {};
+    }
+
+    const parsed = parseSearchInput(searchTerm);
     const backendFilters: FilterTaskInput = {};
 
     if (parsed.name) {
@@ -56,5 +64,5 @@ export const useSearchFiltes = () => {
     }
 
     return backendFilters;
-  }, [debouncedSearch, users]);
+  }, [searchTerm, isSearchActive, users]);
 };

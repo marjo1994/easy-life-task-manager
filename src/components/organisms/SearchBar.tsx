@@ -6,9 +6,16 @@ import { PointEstimate, Status, TaskTag } from "../../__generated__/graphql";
 import searchIcon from "../../assets/search-icon.svg";
 import alertIcon from "../../assets/alert-icon.svg";
 import profile from "../../assets/profile-pic.png";
+import { Cross2Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 export const SearchBar = () => {
-  const { searchTerm, setSearchTerm } = useSearchStore();
+  const {
+    searchTerm,
+    setSearchTerm,
+    activateSearch,
+    clearSearch,
+    isSearchActive,
+  } = useSearchStore();
   const { usersOptions } = useUsers();
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -26,6 +33,20 @@ export const SearchBar = () => {
     setSearchTerm(e.target.value);
     setShowSuggestions(false);
     setActiveFilter(null);
+  };
+
+  const handleSearch = () => {
+    activateSearch();
+  };
+
+  const handleClear = () => {
+    clearSearch();
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   const focusInputAtEnd = () => {
@@ -103,8 +124,23 @@ export const SearchBar = () => {
             placeholder="Search"
             value={searchTerm}
             onChange={handleInputChange}
+            onKeyDown={handleKeyPress}
             className="text-body-m mr-2 w-full text-neutral-100 placeholder-neutral-100 focus:outline-none"
           />
+          <button
+            onClick={handleSearch}
+            className="hover:bg-primary-50 bg-primary-300 mr-2 ml-2 flex items-center rounded p-2 text-neutral-50 hover:text-neutral-300"
+          >
+            <MagnifyingGlassIcon width="18" height="18" />
+          </button>
+          {isSearchActive && (
+            <button
+              onClick={handleClear}
+              className="mr-6 ml-2 flex items-center rounded bg-neutral-100 p-2 text-neutral-50 hover:bg-neutral-50 hover:text-neutral-200"
+            >
+              <Cross2Icon width="18" height="18" />
+            </button>
+          )}
         </div>
 
         {showSuggestions && activeFilter && activeFilter !== "due" && (
@@ -136,7 +172,11 @@ export const SearchBar = () => {
         )}
 
         <div className="ml-auto flex flex-row items-center">
-          <img className="mr-6 h-6 w-6" src={alertIcon} alt="alert icon" />
+          <img
+            className="mr-6 hidden h-4 w-4 lg:block"
+            src={alertIcon}
+            alt="alert icon"
+          />
           <Menu>
             <MenuButton>
               <img src={profile} alt="profile image" />
