@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { useSearchStore } from "../store/searchStore";
 import { parseSearchInput } from "../utils/parseSearchInput";
-//import { useDebounce } from "../utils/useDebounce";
 import { useUsers } from "./useUsers";
 import type {
   FilterTaskInput,
@@ -12,7 +11,6 @@ import type {
 
 export const useSearchFiltes = () => {
   const { searchTerm, isSearchActive } = useSearchStore();
-  //const debouncedSearch = useDebounce(searchTerm, 600);
   const { users } = useUsers();
 
   return useMemo(() => {

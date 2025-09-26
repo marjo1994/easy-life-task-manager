@@ -126,10 +126,12 @@ export const SearchBar = () => {
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}
             className="text-body-m mr-2 w-full text-neutral-100 placeholder-neutral-100 focus:outline-none"
+            data-testid="search-input"
           />
           <button
             onClick={handleSearch}
             className="hover:bg-primary-50 bg-primary-300 mr-2 ml-2 flex items-center rounded p-2 text-neutral-50 hover:text-neutral-300"
+            data-testid="search-button"
           >
             <MagnifyingGlassIcon width="18" height="18" />
           </button>
@@ -137,6 +139,7 @@ export const SearchBar = () => {
             <button
               onClick={handleClear}
               className="mr-6 ml-2 flex items-center rounded bg-neutral-100 p-2 text-neutral-50 hover:bg-neutral-50 hover:text-neutral-200"
+              data-testid="clear-button"
             >
               <Cross2Icon width="18" height="18" />
             </button>
