@@ -40,3 +40,27 @@ export const formatDate = (isoString: string): Record<string, string> => {
 
   return { text: `${day} ${month}, ${year}`, color };
 };
+
+export const isoToDateOnly = (isoString: string | null): string | null => {
+  if (!isoString) return null;
+  return isoString.split("T")[0];
+};
+
+export const dateOnlyToISO = (dateOnly: string | null): string | null => {
+  if (!dateOnly) return null;
+  return `${dateOnly}T00:00:00.000Z`;
+};
+
+export const formatToDateOnly = (date: Date): string => {
+  return format(date, "yyyy-MM-dd");
+};
+
+export const parseDateOnly = (dateOnly: string | null): Date | null => {
+  if (!dateOnly) return null;
+  try {
+    const parsed = parseISO(dateOnly);
+    return isValid(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+};
