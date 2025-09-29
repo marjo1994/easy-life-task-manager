@@ -23,6 +23,8 @@ export const ColumnContainer = ({
     id,
   });
 
+  console.log("tasks", tasks);
+
   return (
     <div className="flex w-80 flex-shrink-0 flex-col rounded-lg xl:w-87">
       <h2 className="text-headline-s-mobile xl:text-body-l sticky top-0 z-10 mb-6 font-semibold text-neutral-50">
@@ -37,6 +39,13 @@ export const ColumnContainer = ({
             : "bg-transparent"
         }`}
       >
+        {tasks.length === 0 && (
+          <p
+            className={`${isOver ? "hidden" : "rounded-md bg-neutral-200 p-2 text-center font-semibold text-neutral-50"}`}
+          >
+            Not tasks yet
+          </p>
+        )}
         <div className="flex flex-col gap-4">
           {tasks.map((task) => (
             <DraggableCard

@@ -130,18 +130,18 @@ export const SearchBar = () => {
           />
           <button
             onClick={handleSearch}
-            className="hover:bg-primary-50 bg-primary-300 mr-2 ml-2 flex items-center rounded p-2 text-neutral-50 hover:text-neutral-300"
+            className="hover:bg-primary-50 bg-primary-300 mr-4 ml-2 flex items-center rounded p-2 text-neutral-50 hover:text-neutral-300"
             data-testid="search-button"
           >
-            <MagnifyingGlassIcon width="18" height="18" />
+            <MagnifyingGlassIcon width="20" height="20" />
           </button>
           {isSearchActive && (
             <button
               onClick={handleClear}
-              className="mr-6 ml-2 flex items-center rounded bg-neutral-100 p-2 text-neutral-50 hover:bg-neutral-50 hover:text-neutral-200"
+              className="mr-6 flex items-center rounded bg-neutral-100 p-2 text-neutral-50 hover:bg-neutral-50 hover:text-neutral-200"
               data-testid="clear-button"
             >
-              <Cross2Icon width="18" height="18" />
+              <Cross2Icon width="20" height="20" />
             </button>
           )}
         </div>

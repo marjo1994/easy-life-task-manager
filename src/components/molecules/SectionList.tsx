@@ -7,6 +7,7 @@ import type { GetTasksQuery } from "../../__generated__/graphql";
 import { formatDate } from "../../utils/utils";
 import { pointEstimateToNumber } from "../../utils/pointEstimateToNumber";
 import { tagColors } from "../../utils/tagColors";
+import { getAvatar } from "../../utils/getAvatar";
 import fileIcon from "../../assets/file-icon.svg";
 import commentIcon from "../../assets/comment-icon.svg";
 import avatar from "../../assets/avatar.png";
@@ -46,6 +47,9 @@ export const Section = ({ title, tasks }: SectionProps) => {
                   ? tagColors[firstTag]
                   : {};
                 const { text: dateText } = formatDate(task.dueDate);
+                const assigneeAvatar = task.assignee?.id
+                  ? getAvatar(task.assignee.id)
+                  : null;
 
                 return (
                   <div
@@ -92,12 +96,25 @@ export const Section = ({ title, tasks }: SectionProps) => {
                       {pointEstimateToNumber(task.pointEstimate)} Points
                     </span>
                     <span className="text-subheadline-m-mobile xl:text-body-m flex flex-row items-center px-2 py-4 font-normal">
-                      <img
-                        className="mr-2 h-8 w-8"
-                        src={avatar}
-                        alt="profile"
-                      />
-                      {task.assignee?.fullName}
+                      {assigneeAvatar ? (
+                        <>
+                          <img
+                            className="mr-2 h-8 w-8 rounded-full"
+                            src={assigneeAvatar}
+                            alt={`${task.assignee?.fullName} profile`}
+                          />
+                          {task.assignee?.fullName}
+                        </>
+                      ) : (
+                        <>
+                          <img
+                            className="full h-8 w-8 rounded"
+                            src={avatar}
+                            alt="profile"
+                          />
+                          Profile
+                        </>
+                      )}
                     </span>
                     <span className="text-subheadline-m-mobile xl:text-body-m flex flex-row items-center px-2 py-4 font-normal">
                       {dateText}
