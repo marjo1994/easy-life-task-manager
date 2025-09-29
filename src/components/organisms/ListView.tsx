@@ -12,9 +12,9 @@ export const TaskListView = ({ tasks }: { tasks: GetTasksQuery["tasks"] }) => {
 
   return (
     <div className="w-full">
-      <div className="min-w-[900px] lg:min-w-0">
+      <div className="min-w-max">
         <div className="mb-4 rounded-sm border border-neutral-200 bg-neutral-300 text-neutral-50">
-          <div className="text-body-m grid grid-cols-[2fr_1fr_1fr_1fr_1fr] divide-x divide-neutral-200 xl:grid-cols-[3fr_1fr_1fr_1fr_1fr]">
+          <div className="text-body-m grid grid-cols-[2fr_1fr_0.5fr_1fr_1fr] divide-x divide-neutral-200 xl:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
             <span className="p-4"># Task Name</span>
             <span className="p-4">Task Tags</span>
             <span className="p-4">Estimate</span>

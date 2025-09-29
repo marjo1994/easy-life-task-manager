@@ -50,7 +50,7 @@ export const Section = ({ title, tasks }: SectionProps) => {
                 return (
                   <div
                     key={task.id}
-                    className="text-body-m grid grid-cols-[2fr_1fr_1fr_1fr_1fr] divide-x divide-neutral-200 hover:bg-neutral-400 xl:grid-cols-[3fr_1fr_1fr_1fr_1fr]"
+                    className="text-body-m grid grid-cols-[2fr_1fr_0.5fr_1fr_1fr] divide-x divide-neutral-200 hover:bg-neutral-400 xl:grid-cols-[2fr_1fr_1fr_1fr_1fr]"
                   >
                     <span className="text-subheadline-m-mobile xl:text-body-m relative flex flex-row items-center py-4 pr-5 pl-10 font-normal">
                       {firstTag && (
@@ -71,18 +71,18 @@ export const Section = ({ title, tasks }: SectionProps) => {
                       </div>
                     </span>
 
-                    <div className="flex gap-1 px-2 py-3">
+                    <div className="flex items-center gap-2 px-2 py-3">
                       {firstTag && (
                         <span
                           key={firstTag}
-                          className={`text-body-s-mobile xl:text-body-m grid place-items-center rounded-sm px-2 py-0.5 font-semibold xl:px-4 xl:py-1 ${bg} ${text}`}
+                          className={`text-body-s-mobile xl:text-body-m grid h-[32px] place-items-center rounded-sm px-4 font-semibold xl:px-4 xl:py-1 ${bg} ${text}`}
                         >
                           {firstTag}
                         </span>
                       )}
 
                       {task.tags.length > 1 && (
-                        <span className="text-body-s-mobile xl:text-body-m grid place-items-center rounded-sm bg-neutral-200 px-2 py-0.5 font-semibold text-neutral-50 xl:px-4 xl:py-1">
+                        <span className="text-body-s-mobile xl:text-body-m grid h-[32px] place-items-center rounded-sm bg-neutral-200 px-4 font-semibold text-neutral-50 xl:px-4 xl:py-1">
                           +{task.tags.length - 1}
                         </span>
                       )}
@@ -93,7 +93,7 @@ export const Section = ({ title, tasks }: SectionProps) => {
                     </span>
                     <span className="text-subheadline-m-mobile xl:text-body-m flex flex-row items-center px-2 py-4 font-normal">
                       <img
-                        className="mr-1 h-8 w-8"
+                        className="mr-2 h-8 w-8"
                         src={avatar}
                         alt="profile"
                       />
