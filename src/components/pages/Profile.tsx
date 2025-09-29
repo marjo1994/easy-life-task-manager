@@ -1,4 +1,5 @@
 import { useProfile } from "../../hooks/useProfile";
+import { toPascalCase } from "../../utils/pascalCase";
 import { LoadingState } from "../atoms/Loading";
 
 export const Profile = () => {
@@ -21,7 +22,7 @@ export const Profile = () => {
           <div>
             <p className="text-body-s text-neutral-100">Full Name</p>
             <p className="text-body-m font-medium text-neutral-50">
-              {profile.fullName}
+              {toPascalCase(profile.fullName)}
             </p>
           </div>
           <div>
@@ -33,7 +34,7 @@ export const Profile = () => {
           <div>
             <p className="text-body-s text-gray-500">Type</p>
             <p className="text-body-m font-medium text-neutral-50">
-              {profile.type}
+              {toPascalCase(profile.type)}
             </p>
           </div>
           <div>

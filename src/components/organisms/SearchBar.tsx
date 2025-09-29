@@ -3,10 +3,12 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { useSearchStore } from "../../store/searchStore";
 import { useUsers } from "../../hooks/useUsers";
 import { PointEstimate, Status, TaskTag } from "../../__generated__/graphql";
+import { useProfile } from "../../hooks/useProfile";
+import { getAvatar } from "../../utils/getAvatar";
 import searchIcon from "../../assets/search-icon.svg";
 import alertIcon from "../../assets/alert-icon.svg";
-import profile from "../../assets/profile-pic.png";
 import { Cross2Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 export const SearchBar = () => {
   const {
@@ -16,6 +18,7 @@ export const SearchBar = () => {
     clearSearch,
     isSearchActive,
   } = useSearchStore();
+  const { profile } = useProfile();
   const { usersOptions } = useUsers();
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -182,7 +185,18 @@ export const SearchBar = () => {
           />
           <Menu>
             <MenuButton>
-              <img src={profile} alt="profile image" />
+              {profile && (
+                <>
+                  <img
+                    src={getAvatar(profile.fullName)}
+                    alt="profile image"
+                    className="relative flex h-auto w-10 rounded-full border-2 border-neutral-100"
+                  />
+                  <div className="absolute right-6 bottom-2 rounded-full bg-neutral-100">
+                    <ChevronDownIcon className="text-neutral-200" />
+                  </div>
+                </>
+              )}
             </MenuButton>
             <MenuItems
               anchor="bottom end"
@@ -190,9 +204,11 @@ export const SearchBar = () => {
             >
               <MenuItem
                 as="button"
-                className="flex w-full flex-row items-center px-4 py-1.5 text-left text-neutral-50"
+                className="flex-end flex w-full px-4 py-1.5"
               >
-                <a href="/profile">View Profile</a>
+                <a href="/profile" className="text-right text-neutral-50">
+                  View Profile
+                </a>
               </MenuItem>
             </MenuItems>
           </Menu>

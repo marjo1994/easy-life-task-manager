@@ -41,9 +41,9 @@ export const ColumnContainer = ({
       >
         {tasks.length === 0 && (
           <p
-            className={`${isOver ? "hidden" : "rounded-md bg-neutral-200 p-2 text-center font-semibold text-neutral-50"}`}
+            className={`${isOver ? "hidden" : "text-body-md rounded-md bg-neutral-200 p-2 text-center font-semibold text-neutral-50"}`}
           >
-            Not tasks yet
+            No tasks yet
           </p>
         )}
         <div className="flex flex-col gap-4">
