@@ -1,5 +1,6 @@
 import type { GetTasksQuery } from "../../__generated__/graphql";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { formatDate } from "../../utils/utils";
 import { pointEstimateToNumber } from "../../utils/pointEstimateToNumber";
 import { getAvatar } from "../../utils/getAvatar";
@@ -11,6 +12,7 @@ import avatar from "../../assets/avatar.png";
 import alarmIcon from "../../assets/alarm-icon.svg";
 import editIcon from "../../assets/edit-icon.svg";
 import deleteIcon from "../../assets/delete-icon.svg";
+import { toPascalCase } from "../../utils/pascalCase";
 
 type Task = GetTasksQuery["tasks"][number];
 
@@ -28,6 +30,8 @@ export const Card = ({
   isDragging = false,
 }: CardProps) => {
   const assigneeAvatar = task.assignee?.id ? getAvatar(task.assignee.id) : null;
+
+  const remainingArr = task.tags.slice(2);
   const { text, color } = formatDate(task.dueDate);
 
   const handleEdit = (e: React.MouseEvent) => {
@@ -99,7 +103,7 @@ export const Card = ({
       </div>
       <div className="mb-4 flex gap-2">
         {task.tags &&
-          task.tags.map((tag) => {
+          task.tags.slice(0, 2).map((tag) => {
             const { bg, text } = tagColors[tag];
             return (
               <span
@@ -110,6 +114,22 @@ export const Card = ({
               </span>
             );
           })}
+        {task.tags.length > 2 && (
+          <Popover>
+            <PopoverButton>
+              <span className="text-body-m grid place-items-center rounded-sm bg-neutral-200 px-4 py-1 font-semibold text-neutral-50">
+                +{task.tags.length - 2}
+              </span>
+            </PopoverButton>
+            <PopoverPanel
+              anchor="top start"
+              transition
+              className="mb-3 flex origin-top flex-col rounded-md bg-neutral-500 px-1 py-1 text-neutral-50 transition duration-200 ease-out [--anchor-gap:8px] data-closed:scale-95 data-closed:opacity-0"
+            >
+              {remainingArr.map((word) => toPascalCase(word)).join(", ")}
+            </PopoverPanel>
+          </Popover>
+        )}
       </div>
       <div className="mb-2 flex justify-between">
         {assigneeAvatar ? (
