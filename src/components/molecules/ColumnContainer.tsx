@@ -1,6 +1,7 @@
 import { useDroppable } from "@dnd-kit/core";
 import { DraggableCard } from "./DraggableCard";
 import type { GetTasksQuery } from "../../__generated__/graphql";
+import { useEffect } from "react";
 
 type Task = GetTasksQuery["tasks"][number];
 
@@ -21,9 +22,15 @@ export const ColumnContainer = ({
 }: ColumnContainerProps) => {
   const { setNodeRef, isOver } = useDroppable({
     id,
+    data: {
+      type: "column",
+      status: id,
+    },
   });
 
-  console.log("tasks", tasks);
+  useEffect(() => {
+    console.log(`Column ${id} isOver:`, isOver);
+  }, [isOver, id]);
 
   return (
     <div className="flex w-80 flex-shrink-0 flex-col rounded-lg xl:w-87">

@@ -20,6 +20,7 @@ import {
   TouchSensor,
   useSensor,
   useSensors,
+  pointerWithin,
   type DragEndEvent,
   type DragStartEvent,
 } from "@dnd-kit/core";
@@ -102,6 +103,9 @@ export const KanbanView = ({ tasks, refetch }: KanbanProps) => {
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
+
+    console.log("Active:", active);
+    console.log("Over:", over);
     if (!over) {
       setActiveTask(null);
       return;
@@ -110,6 +114,8 @@ export const KanbanView = ({ tasks, refetch }: KanbanProps) => {
     if (!activeTask) return;
 
     const overId = over.id.toString();
+
+    console.log(`Moving task ${active.id} to status ${over.id}`);
 
     try {
       const isOverStatusColumn = overId in STATUS_LABELS;
@@ -157,6 +163,7 @@ export const KanbanView = ({ tasks, refetch }: KanbanProps) => {
       collisionDetection={rectIntersection}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      modifiers={[]}
     >
       <div className="flex h-full min-w-max gap-8">
         {ALL_STATUSES.map((status) => (

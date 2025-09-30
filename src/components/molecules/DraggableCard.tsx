@@ -48,7 +48,7 @@ export const DraggableCard = ({
       style={style}
       {...listeners}
       {...attributes}
-      className={`${dragClass} ${overClass}`}
+      className={`touch-none ${dragClass} ${overClass}`}
     >
       <Card
         task={task}
