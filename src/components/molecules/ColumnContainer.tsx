@@ -28,10 +28,6 @@ export const ColumnContainer = ({
     },
   });
 
-  useEffect(() => {
-    console.log(`Column ${id} isOver:`, isOver);
-  }, [isOver, id]);
-
   return (
     <div className="flex w-80 flex-shrink-0 flex-col rounded-lg xl:w-87">
       <h2 className="text-headline-s-mobile xl:text-body-l sticky top-0 z-10 mb-6 font-semibold text-neutral-50">
