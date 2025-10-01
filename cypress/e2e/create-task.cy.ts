@@ -9,6 +9,7 @@ describe("AddTaskForm", () => {
 
     cy.get("body").should("exist");
   });
+
   it("Create a new task", () => {
     cy.get("button").find('img[alt="plus-icon"]').parent("button").click();
 

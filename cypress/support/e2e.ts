@@ -14,4 +14,6 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
+import "cypress-real-events";
+import "@4tw/cypress-drag-drop";

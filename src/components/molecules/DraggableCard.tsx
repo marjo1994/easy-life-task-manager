@@ -45,10 +45,12 @@ export const DraggableCard = ({
   return (
     <div
       ref={setRefs}
+      data-cy="task-card"
+      data-cy-id={task.id}
       style={style}
       {...listeners}
       {...attributes}
-      className={`touch-none ${dragClass} ${overClass}`}
+      className={`taskCard touch-none ${dragClass} ${overClass}`}
     >
       <Card
         task={task}

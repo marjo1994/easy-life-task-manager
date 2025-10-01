@@ -1,7 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { DraggableCard } from "./DraggableCard";
 import type { GetTasksQuery } from "../../__generated__/graphql";
-import { useEffect } from "react";
 
 type Task = GetTasksQuery["tasks"][number];
 
@@ -36,6 +35,7 @@ export const ColumnContainer = ({
 
       <div
         ref={setNodeRef}
+        data-cy={`column-${id}`}
         className={`flex-1 overflow-y-auto rounded-lg p-2 transition-colors ${
           isOver
             ? "bg-opacity-30 border-2 border-dashed border-neutral-100 bg-neutral-200"
